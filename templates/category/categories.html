@@ -2,5 +2,5 @@
 
 {% for i in categories %}
 <a style="font-size:120%" href='{{url_for('categoryHome', category_id = i.id)}}'>{{i.name}}</a></br>
-Created by: {{i.user.name}}
+Created by: {{i.user.name}}</br>
 {% endfor %}
