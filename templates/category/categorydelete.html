@@ -3,4 +3,5 @@ Delete {{category.name}}????</br></br>
 THIS IS PERMANENT AND WILL DELETE ALL ASSOCIATED ITEMS!!!!
 
 <form action = '{{url_for('categoryDelete', category_id=category.id)}}' method = 'POST'>
+  <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 <input type='submit', value = 'Delete'>
