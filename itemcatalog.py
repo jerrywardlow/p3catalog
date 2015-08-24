@@ -157,15 +157,15 @@ def disconnect():
         del login_session['user_id']
         del login_session['provider']
         flash("You have successfully been logged out.")
-        return redirect(url_for('categoryGate'))
+        return redirect(url_for('index'))
     else:
         flash("You were not logged in")
-        return redirect(url_for('categoryGate'))
+        return redirect(url_for('index'))
 
 #Main page - all item categories
 @app.route('/')
-@app.route('/categories/')
-def categoryGate():
+@app.route('/index/')
+def index():
     categories = session.query(Category).order_by(asc(Category.name))
     items = session.query(Item).order_by(Item.created).limit(8)
     privacy_status = False
@@ -209,7 +209,7 @@ def categoryAdd():
         session.add(newCategory)
         flash('New %s Category Successfully Added' % newCategory.name)
         session.commit()
-        return redirect(url_for('categoryGate'))
+        return redirect(url_for('index'))
     else:
         return render_template('category/categoryadd.html')
 
@@ -229,7 +229,7 @@ def categoryEdit(category_id):
         if request.form['photo']:
             targetCategory.photo = request.form['photo']
         flash('Category Information Updated')
-        return redirect(url_for('categoryGate'))
+        return redirect(url_for('index'))
     else:
         return render_template('category/categoryedit.html',
                                category=targetCategory)
@@ -249,7 +249,7 @@ def categoryDelete(category_id):
         for i in children:
             session.delete(i)
         session.commit()
-        return redirect(url_for('categoryGate'))
+        return redirect(url_for('index'))
     else:
         return render_template('category/categorydelete.html',
                                category=targetCategory)
