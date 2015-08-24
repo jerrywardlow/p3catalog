@@ -171,7 +171,7 @@ def categoryGate():
     privacy_status = False
     if 'username' in login_session:
         privacy_status = True
-    return render_template('category/categories.html',
+    return render_template('index.html',
                             categories = categories,
                             items = items,
                             privacy_status = privacy_status)
