@@ -1,5 +1,6 @@
+<h1>List of Items</h1>
+
 {% for i in items %}
 <a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a></br>
-created by {{i.user.name}}
-</br></br>
+Created by: {{i.user.name}}
 {% endfor %}
