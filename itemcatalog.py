@@ -176,6 +176,12 @@ def index():
                             items = items,
                             privacy_status = privacy_status)
 
+@app.route('/categories/')
+def categoryGate():
+    categories = session.query(Category).order_by(asc(Category.name))
+    return render_template('category/categories.html',
+                            categories = categories)
+
 
 #Show a specific Category and associated Items
 @app.route('/category/<int:category_id>/')
