@@ -1,0 +1,21 @@
+<h1>List of Categories</h1>
+
+{% for i in categories %}
+<a style="font-size:120%" href='{{url_for('categoryHome', category_id = i.id)}}'>{{i.name}}</a>
+</br></br>
+{% endfor %}
+
+
+<h1>Recent Items</h1>
+
+{% for i in items %}
+<a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
+</br></br>
+{% endfor %}
+{% if privacy_status %}
+<a style="font-size:90%" href='{{url_for('categoryAdd')}}'>Add a New Category</a></br>
+<a style="font-size:90%" href='{{url_for('itemAdd')}}'>Add a New Item</a></br>
+<a style="font-size:90%" href='{{url_for('disconnect')}}'>Logout</a></br>
+{% else %}
+<a style="font-size:90%" href='{{url_for('showLogin')}}'>Login Page</a></br>
+{% endif %}

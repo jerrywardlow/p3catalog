@@ -1,0 +1,9 @@
+SeaSurf for csrf
+XML
+JSON
+
+simplify the templates, get away from the public/private system and show/hide
+edit/delete commands if user is logged in/not. there is too much overlap
+for the split system to be effective. find out the status of the l
+
+implement sql injection prevention using Bleach

@@ -1,0 +1,18 @@
+<h1>Category Home for {{category.name}}</h1>
+Category created by {{category.user.name}}</br></br>
+
+Description: {{category.description}}</br></br>
+
+Items in {{category.name}}:</br></br>
+{% for i in items %}
+<a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
+</br></br>
+{% endfor %}
+
+{% if privacy_status %}
+<a style="font-size:90%" href='{{url_for('itemAdd')}}'>Add a new item</a></br>
+{% if ownership_status %}
+<a style="font-size:90%" href='{{url_for('categoryEdit', category_id = category.id)}}'>Edit Category</a></br>
+{% endif %}
+{% endif %}
+<a style="font-size:90%" href='{{url_for('categoryGate')}}'>Return to Category List</a></br>

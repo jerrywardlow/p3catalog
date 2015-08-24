@@ -1,0 +1,5 @@
+{% for i in items %}
+<a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a></br>
+created by {{i.user.name}}
+</br></br>
+{% endfor %}
