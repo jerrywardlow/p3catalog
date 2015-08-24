@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% for i in categories %}
+<a style="font-size:120%" href='{{url_for('categoryHome', category_id = i.id)}}'>{{i.name}}</a>
+</br></br>
+{% endfor %}
