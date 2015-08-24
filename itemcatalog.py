@@ -33,6 +33,7 @@ def showLogin():
     return render_template('login.html', STATE=state)
 
 #Google connect
+@csrf.exempt
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
