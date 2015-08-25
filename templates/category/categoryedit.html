@@ -4,7 +4,7 @@ Edit {{category.name}}</br></br>
   <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 
 Name:</br>
-<input type = 'text' size = '30' name = 'name' value = '{{category.name}}'></br>
+<input type = 'text' size = '30' name = 'name' value = '{{category.name}}' required></br>
 
 Category Description:</br>
 <textarea name= 'description' rows='10' cols='50'>{{category.description}}</textarea></br></br>
