@@ -1,3 +1,13 @@
+<style>
+.thumb {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-position: center center;
+    background-size: cover;
+}
+</style>
+
 <h1>Category Home for {{category.name}}</h1>
 Category created by {{category.user.name}}</br></br>
 
@@ -5,6 +15,7 @@ Description: {{category.description}}</br></br>
 
 Items in {{category.name}}:</br></br>
 {% for i in items %}
+<div class="thumb" style="background-image: url('{{i.photo}}');" title='{{i.name}}'></div>
 <a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
 </br></br>
 {% endfor %}
