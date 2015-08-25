@@ -355,6 +355,31 @@ def itemDelete(item_id):
     else:
         return render_template('item/itemdelete.html', item = targetItem)
 
+#JSON endpoints
+@app.route('/categories/JSON/')
+def categoriesJSON():
+    categories = session.query(Category).order_by(asc(Category.name))
+    return jsonify(categories=[c.serialize for c in categories])
+
+@app.route('/items/JSON/')
+def itemsJSON():
+    items = session.query(Item).order_by(Item.name)
+    return jsonify(items=[i.serialize for i in items])
+
+@app.route('/category/<int:category_id>/JSON/')
+def categoryJSON(category_id):
+    category = session.query(Category).filter_by(id=category_id).one()
+    return jsonify(category=category.serialize)
+
+@app.route('/item/<int:item_id>/JSON')
+def itemJSON(item_id):
+    item = session.query(Item).filter_by(id=item_id).one()
+    return jsonify(item = item.serialize)
+
+@app.route('/category/<int:category_id>/items/JSON/')
+def categoryItemsJSON(category_id):
+    items = session.query(Item).filter_by(category_id=category_id).all()
+    return jsonify(items=[i.serialize for i in items])
 
 
 
