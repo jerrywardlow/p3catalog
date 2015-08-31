@@ -47,10 +47,9 @@ class Item(Base):
     photo = Column(String)
     created = Column(DateTime, default = datetime.now)
     category_id = Column(Integer, ForeignKey('categories.id'))
-    ###category = relationship(Category)
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
-    category = relationship(Category, single_parent=True, cascade='all, delete')
+    category = relationship(Category)
 
     @property
     def serialize(self):
