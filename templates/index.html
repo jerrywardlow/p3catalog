@@ -4,12 +4,16 @@
 
 {% block content %}
 
-<h1>Item Catalog</h1>
+<h2>Item Catalog</h2>
 <hr>
 <p>Recent items added to the catalog</p>
 {% for i in items %}
-<a  href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
-</br></br>
+{%if i.photo %}
+<div class="thumb" style="background-image: url('{{i.photo}}');" title='{{i.name}}'></div>
+{% else %}
+<div class="thumb" style="background-image: url('/static/noimg.png');" title='{{i.name}}'></div>
+{% endif %}
+<a href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a></br></br>
 {% endfor %}
 
 {% if privacy_status %}

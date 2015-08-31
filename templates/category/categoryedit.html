@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1>Edit {{category.name}}</h1>
+<h2>Edit {{category.name}}</h2>
 <hr>
 
 <form action = '{{url_for('categoryEdit', category_id = category.id)}}' method = 'POST'>

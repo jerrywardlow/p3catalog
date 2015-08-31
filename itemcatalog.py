@@ -183,7 +183,7 @@ def disconnect():
 @app.route('/index/')
 def index():
     categories = session.query(Category).order_by(asc(Category.name))
-    items = session.query(Item).order_by(Item.created).limit(8)
+    items = session.query(Item).order_by(Item.created).limit(4)
     return render_template('index.html',
                             categories = categories,
                             items = items,
