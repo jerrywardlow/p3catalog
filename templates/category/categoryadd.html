@@ -3,7 +3,8 @@
 {% block title %}Add New Category{% endblock %}
 
 {% block content %}
-
+<h1>Add a new Category</h1>
+<hr>
 <form action = '{{url_for('categoryAdd')}}' method = 'POST'>
   <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 

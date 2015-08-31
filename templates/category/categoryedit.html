@@ -4,7 +4,8 @@
 
 {% block content %}
 
-Edit {{category.name}}</br></br>
+<h1>Edit {{category.name}}</h1>
+<hr>
 
 <form action = '{{url_for('categoryEdit', category_id = category.id)}}' method = 'POST'>
   <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">

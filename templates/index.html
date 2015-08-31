@@ -4,9 +4,11 @@
 
 {% block content %}
 
-<h1>Categories</h1>
-{% for i in categories %}
-<a style="font-size:120%" href='{{url_for('categoryHome', category_id = i.id)}}'>{{i.name}}</a>
+<h1>Item Catalog</h1>
+<hr>
+<p>Recent items added to the catalog</p>
+{% for i in items %}
+<a  href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
 </br></br>
 {% endfor %}
 
