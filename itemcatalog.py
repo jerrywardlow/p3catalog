@@ -214,6 +214,7 @@ def categoryHome(category_id):
             ownership_status = True
     return render_template('category/categoryhome.html',
                             category = category,
+                            categories = categories,
                             items = items,
                             privacy_status = privacy_status,
                             ownership_status = ownership_status)
@@ -235,7 +236,7 @@ def categoryAdd():
         session.commit()
         return redirect(url_for('index'))
     else:
-        return render_template('category/categoryadd.html')
+        return render_template('category/categoryadd.html', categories = categories)
 
 #Edit a Category
 @app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
@@ -257,7 +258,8 @@ def categoryEdit(category_id):
         return redirect(url_for('index'))
     else:
         return render_template('category/categoryedit.html',
-                               category=targetCategory)
+                               category=targetCategory,
+                               categories = categories)
 
 #Delete a Category
 @app.route('/category/<int:category_id>/delete/', methods=['GET', 'POST'])
@@ -278,7 +280,8 @@ def categoryDelete(category_id):
         return redirect(url_for('index'))
     else:
         return render_template('category/categorydelete.html',
-                               category=targetCategory)
+                               category=targetCategory,
+                               categories = categories)
 
 #MShow all Items
 @app.route('/items/')
@@ -286,7 +289,8 @@ def itemGate():
     categories = session.query(Category).order_by(asc(Category.name))
     items = session.query(Item).order_by(Item.name)
     return render_template('item/items.html',
-                            items = items)
+                            items = items,
+                            categories = categories)
 
 #Show a specific Item
 @app.route('/item/<int:item_id>/')
@@ -299,7 +303,8 @@ def itemHome(item_id):
         ownership_status = True
     return render_template('item/itemhome.html',
                             item = item,
-                            ownership_status = ownership_status)
+                            ownership_status = ownership_status,
+                            categories = categories)
 
 #Add a new item
 @app.route('/item/add/', methods=['GET', 'POST'])
@@ -360,7 +365,7 @@ def itemDelete(item_id):
         session.commit()
         return redirect(url_for('categoryHome', category_id = targetItem.category_id))
     else:
-        return render_template('item/itemdelete.html', item = targetItem)
+        return render_template('item/itemdelete.html', item = targetItem, categories = categories)
 
 #JSON endpoints
 @app.route('/categories/JSON/')
