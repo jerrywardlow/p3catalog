@@ -8,6 +8,9 @@
         <li><a href="/">Home</a></li>
         <li><a href="/categories/">All Categories</a></li>
         <li><a href="/items/">All Items</a></li>
+        {% if privacy_status %}
+        <li><a href="/JSON/">JSON</a></li>
+        {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if privacy_status %}

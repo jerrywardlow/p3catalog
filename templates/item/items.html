@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1>List of Items</h1>
+<h1>List of All Items in Catalog</h1>
 
 {% for i in items %}
 {%if i.photo %}
@@ -13,7 +13,7 @@
 <div class="thumb" style="background-image: url('/static/noimg.png');" title='{{i.name}}'></div>
 {% endif %}
 <a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a></br>
-Created by: {{i.user.name}}</br>
+Created by: {{i.user.name}}</br></br>
 {% endfor %}
 
 {% endblock %}

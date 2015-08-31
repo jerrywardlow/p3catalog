@@ -314,7 +314,6 @@ def itemHome(item_id):
 @app.route('/item/add/', methods=['GET', 'POST'])
 @app.route('/<int:category_id>/item/add/', methods=['GET', 'POST'])
 def itemAdd(category_id):
-    target_category = session.query(Category).filter_by(id=category_id).one()
     categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         return redirect('/login')
@@ -332,7 +331,7 @@ def itemAdd(category_id):
         return render_template('item/itemadd.html',
                                 categories = categories,
                                 privacy_status = privacy_check(),
-                                target_category = target_category)
+                                target = category_id)
 
 #Edit an item
 @app.route('/item/<int:item_id>/edit/', methods=['GET', 'POST'])
@@ -383,6 +382,13 @@ def itemDelete(item_id):
                                 privacy_status = privacy_check())
 
 #JSON endpoints
+@app.route('/JSON/')
+def aboutJSON():
+    categories = session.query(Category).order_by(asc(Category.name))
+    return render_template('JSON.html',
+                            categories = categories,
+                            privacy_status = privacy_check())
+
 @app.route('/categories/JSON/')
 def categoriesJSON():
     categories = session.query(Category).order_by(asc(Category.name))

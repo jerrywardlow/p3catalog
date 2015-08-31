@@ -10,7 +10,7 @@
 Category:</br>
 <select name='category_id'>
 {% for i in categories %}
-<option value={{i.id}} {% if i.id == target_category.id %}selected{% endif %}>{{i.name}}</option>
+<option value={{i.id}} {% if i.id == target %}selected{% endif %}>{{i.name}}</option>
 {% endfor %}
 </select></br>
 
