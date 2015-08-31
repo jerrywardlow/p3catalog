@@ -1,0 +1,15 @@
+<div class="col-sm-2">
+    <ul class="nav">
+    </br>
+      <li><a href="/">Home</a></li>
+      {% for i in categories %}
+      <li><a href='{{url_for('categoryHome', category_id = i.id)}}'>{{i.name}}</a></li>
+      {% endfor %}
+      {% if privacy_status %}
+      </br></br>
+      <hr>
+      <li><a href='{{url_for('categoryAdd')}}'>Add New Category</a></li>
+      <li><a href='{{url_for('itemAdd', category_id = 1)}}'>Add New Item</a></li>
+      {% endif %}
+    </ul>
+</div>
