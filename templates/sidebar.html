@@ -1,6 +1,5 @@
 <div class="col-sm-2">
     <ul class="nav">
-    </br>
       <li><a href="/categories">List of Categories</a></li>
       {% for i in categories %}
       <li><a href='{{url_for('categoryHome', category_id = i.id)}}'>{{i.name}}</a></li>
