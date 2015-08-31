@@ -6,7 +6,7 @@ from flask.ext.seasurf import SeaSurf
 from database_model import *
 
 #SQLAlchemy imports to
-from sqlalchemy import asc
+from sqlalchemy import asc, desc
 from sqlalchemy.orm import sessionmaker
 #Create new database session using 'engine' defined in 'database_model'
 Session = sessionmaker(bind=engine)
@@ -183,7 +183,7 @@ def disconnect():
 @app.route('/index/')
 def index():
     categories = session.query(Category).order_by(asc(Category.name))
-    items = session.query(Item).order_by(Item.created).limit(4)
+    items = session.query(Item).order_by(desc(Item.created)).limit(4)
     return render_template('index.html',
                             categories = categories,
                             items = items,
@@ -255,7 +255,7 @@ def categoryEdit(category_id):
         if request.form['photo']:
             targetCategory.photo = request.form['photo']
         flash('Category Information Updated')
-        return redirect(url_for('index'))
+        return redirect(url_for('categoryHome', category_id = targetCategory.id))
     else:
         return render_template('category/categoryedit.html',
                                category=targetCategory,
