@@ -1,12 +1,8 @@
-<style>
-.thumb {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    background-position: center center;
-    background-size: cover;
-}
-</style>
+{% extends "layout.html" %}
+
+{% block title %}{{category.name}}{% endblock %}
+
+{% block content %}
 
 <h1>Category Home for {{category.name}}</h1>
 Category created by {{category.user.name}}</br></br>
@@ -15,7 +11,11 @@ Description: {{category.description}}</br></br>
 
 Items in {{category.name}}:</br></br>
 {% for i in items %}
+{%if i.photo %}
 <div class="thumb" style="background-image: url('{{i.photo}}');" title='{{i.name}}'></div>
+{% else %}
+<div class="thumb" style="background-image: url('/static/noimg.png');" title='{{i.name}}'></div>
+{% endif %}
 <a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
 </br></br>
 {% endfor %}
@@ -27,3 +27,5 @@ Items in {{category.name}}:</br></br>
 {% endif %}
 {% endif %}
 <a style="font-size:90%" href='{{url_for('index')}}'>Return to Home</a></br>
+
+{% endblock %}
