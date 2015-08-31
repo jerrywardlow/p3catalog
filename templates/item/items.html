@@ -1,6 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}All Items{% endblock %}
+
+{% block content %}
+
 <h1>List of Items</h1>
 
 {% for i in items %}
+{%if i.photo %}
+<div class="thumb" style="background-image: url('{{i.photo}}');" title='{{i.name}}'></div>
+{% else %}
+<div class="thumb" style="background-image: url('/static/noimg.png');" title='{{i.name}}'></div>
+{% endif %}
 <a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a></br>
 Created by: {{i.user.name}}</br>
 {% endfor %}
+
+{% endblock %}

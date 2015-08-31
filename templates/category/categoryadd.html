@@ -1,3 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}Add New Category{% endblock %}
+
+{% block content %}
+
 <form action = '{{url_for('categoryAdd')}}' method = 'POST'>
   <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 
@@ -13,3 +19,5 @@ Photo:</br>
 <a style="font-size:90%" href='{{url_for('index')}}'>Cancel</a></br>
 
 </form>
+
+{% endblock %}

@@ -1,7 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete {{item.name}}{% endblock %}
+
+{% block content %}
+
 Delete {{item.name}}????</br></br>
 
 THIS IS PERMANENT!!!
 
 <form action = '{{url_for('itemDelete', item_id=item.id)}}' method = 'POST'>
   <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-<input type='submit', value = 'Delete'>
+<input type='submit', value = 'Delete'></br>
+<a style="font-size:90%" href='{{url_for('itemHome', item_id = item.id)}}'>Cancel</a>
+
+{% endblock %}

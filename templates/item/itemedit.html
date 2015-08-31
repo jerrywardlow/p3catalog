@@ -1,3 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit {{item.name}}{% endblock %}
+
+{% block content %}
+
+
 Edit {{item.name}}</br></br>
 
 <form action = '{{url_for('itemEdit', item_id = item.id)}}' method = 'POST'>
@@ -27,3 +34,5 @@ Photo:</br>
 
 </form>
 <a style="font-size:90%" href='{{url_for('itemHome', item_id = item.id)}}'>Cancel</a></br>
+
+{% endblock %}

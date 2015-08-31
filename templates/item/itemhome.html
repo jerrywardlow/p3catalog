@@ -1,3 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}{{item.name}}{% endblock %}
+
+{% block content %}
+
+
 <h1>Item Home for {{item.name}}</h1>
 Item created by {{item.user.name}}</br></br>
 
@@ -10,8 +17,15 @@ category_id: {{item.category_id}}</br>
 user_id: {{item.user_id}}</br>
 category.name: {{item.category.name}}</br>
 
+{% if item.photo %}
+<img src={{item.photo}} height="200"/></br>
+{% endif %}
+
 {% if ownership_status %}
 <a style="font-size:90%" href='{{url_for('itemEdit', item_id = item.id)}}'>Edit Item</a></br>
+<a style="font-size:90%" href='{{url_for('itemDelete', item_id = item.id)}}'>Delete Item</a></br>
 {% endif %}
 
 <a style="font-size:90%" href='{{url_for('categoryHome', category_id=item.category.id)}}'>Return to {{item.category.name}}</a></br>
+
+{% endblock %}

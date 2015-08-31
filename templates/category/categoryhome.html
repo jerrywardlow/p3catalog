@@ -24,6 +24,7 @@ Items in {{category.name}}:</br></br>
 <a style="font-size:90%" href='{{url_for('itemAdd')}}'>Add a new item</a></br>
 {% if ownership_status %}
 <a style="font-size:90%" href='{{url_for('categoryEdit', category_id = category.id)}}'>Edit Category</a></br>
+<a style="font-size:90%" href='{{url_for('categoryDelete', category_id = category.id)}}'>Delete Category</a></br>
 {% endif %}
 {% endif %}
 <a style="font-size:90%" href='{{url_for('index')}}'>Return to Home</a></br>
