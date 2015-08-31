@@ -184,19 +184,17 @@ def disconnect():
 def index():
     categories = session.query(Category).order_by(asc(Category.name))
     items = session.query(Item).order_by(Item.created).limit(8)
-    privacy_status = False
-    if 'username' in login_session:
-        privacy_status = True
     return render_template('index.html',
                             categories = categories,
                             items = items,
-                            privacy_status = privacy_status)
+                            privacy_status = privacy_check())
 
 @app.route('/categories/')
 def categoryGate():
     categories = session.query(Category).order_by(asc(Category.name))
     return render_template('category/categories.html',
-                            categories = categories)
+                            categories = categories,
+                            privacy_status = privacy_check())
 
 
 #Show a specific Category and associated Items
@@ -236,7 +234,9 @@ def categoryAdd():
         session.commit()
         return redirect(url_for('index'))
     else:
-        return render_template('category/categoryadd.html', categories = categories)
+        return render_template('category/categoryadd.html',
+                                categories = categories,
+                                privacy_status = privacy_check())
 
 #Edit a Category
 @app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
@@ -259,6 +259,7 @@ def categoryEdit(category_id):
     else:
         return render_template('category/categoryedit.html',
                                category=targetCategory,
+                               privacy_status = privacy_check(),
                                categories = categories)
 
 #Delete a Category
@@ -281,6 +282,7 @@ def categoryDelete(category_id):
     else:
         return render_template('category/categorydelete.html',
                                category=targetCategory,
+                               privacy_status = privacy_check(),
                                categories = categories)
 
 #MShow all Items
@@ -290,6 +292,7 @@ def itemGate():
     items = session.query(Item).order_by(Item.name)
     return render_template('item/items.html',
                             items = items,
+                            privacy_status = privacy_check(),
                             categories = categories)
 
 #Show a specific Item
@@ -304,6 +307,7 @@ def itemHome(item_id):
     return render_template('item/itemhome.html',
                             item = item,
                             ownership_status = ownership_status,
+                            privacy_status = privacy_check(),
                             categories = categories)
 
 #Add a new item
@@ -327,6 +331,7 @@ def itemAdd(category_id):
     else:
         return render_template('item/itemadd.html',
                                 categories = categories,
+                                privacy_status = privacy_check(),
                                 target_category = target_category)
 
 #Edit an item
@@ -352,7 +357,10 @@ def itemEdit(item_id):
         flash('Item Information Updated')
         return redirect(url_for('itemHome', item_id = item_id))
     else:
-        return render_template('item/itemedit.html', item = targetItem, categories = categories)
+        return render_template('item/itemedit.html',
+                                item = targetItem,
+                                categories = categories,
+                                privacy_status = privacy_check())
 
 #Delete an Item
 @app.route('/item/<int:item_id>/delete/', methods=['GET', 'POST'])
@@ -369,7 +377,10 @@ def itemDelete(item_id):
         session.commit()
         return redirect(url_for('categoryHome', category_id = targetItem.category_id))
     else:
-        return render_template('item/itemdelete.html', item = targetItem, categories = categories)
+        return render_template('item/itemdelete.html',
+                                item = targetItem,
+                                categories = categories,
+                                privacy_status = privacy_check())
 
 #JSON endpoints
 @app.route('/categories/JSON/')
@@ -397,6 +408,10 @@ def categoryItemsJSON(category_id):
     items = session.query(Item).filter_by(category_id=category_id).all()
     return jsonify(items=[i.serialize for i in items])
 
+def privacy_check():
+    if 'username' in login_session:
+        return True
+    return False
 
 
 if __name__ == '__main__':
