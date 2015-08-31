@@ -308,7 +308,9 @@ def itemHome(item_id):
 
 #Add a new item
 @app.route('/item/add/', methods=['GET', 'POST'])
-def itemAdd():
+@app.route('/<int:category_id>/item/add/', methods=['GET', 'POST'])
+def itemAdd(category_id):
+    target_category = session.query(Category).filter_by(id=category_id).one()
     categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         return redirect('/login')
@@ -323,7 +325,9 @@ def itemAdd():
         session.commit()
         return redirect(url_for('categoryHome', category_id = newItem.category_id))
     else:
-        return render_template('item/itemadd.html', categories = categories)
+        return render_template('item/itemadd.html',
+                                categories = categories,
+                                target_category = target_category)
 
 #Edit an item
 @app.route('/item/<int:item_id>/edit/', methods=['GET', 'POST'])
