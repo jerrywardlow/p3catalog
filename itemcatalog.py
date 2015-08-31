@@ -203,6 +203,7 @@ def categoryGate():
 @app.route('/category/<int:category_id>/')
 @app.route('/category/<int:category_id>/home/')
 def categoryHome(category_id):
+    categories = session.query(Category).order_by(asc(Category.name))
     category = session.query(Category).filter_by(id=category_id).one()
     items = session.query(Item).filter_by(category_id=category_id).all()
     privacy_status = False
@@ -221,6 +222,7 @@ def categoryHome(category_id):
 #Create a new Category
 @app.route('/category/add/', methods=['GET', 'POST'])
 def categoryAdd():
+    categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
@@ -238,6 +240,7 @@ def categoryAdd():
 #Edit a Category
 @app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
 def categoryEdit(category_id):
+    categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         return redirect('/login')
     targetCategory = session.query(Category).filter_by(id=category_id).one()
@@ -259,6 +262,7 @@ def categoryEdit(category_id):
 #Delete a Category
 @app.route('/category/<int:category_id>/delete/', methods=['GET', 'POST'])
 def categoryDelete(category_id):
+    categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         return redirect('/login')
     targetCategory = session.query(Category).filter_by(id=category_id).one()
@@ -279,6 +283,7 @@ def categoryDelete(category_id):
 #MShow all Items
 @app.route('/items/')
 def itemGate():
+    categories = session.query(Category).order_by(asc(Category.name))
     items = session.query(Item).order_by(Item.name)
     return render_template('item/items.html',
                             items = items)
@@ -287,6 +292,7 @@ def itemGate():
 @app.route('/item/<int:item_id>/')
 @app.route('/item/<int:item_id>/home/')
 def itemHome(item_id):
+    categories = session.query(Category).order_by(asc(Category.name))
     item = session.query(Item).filter_by(id=item_id).one()
     ownership_status = False
     if 'username' in login_session and item.user.id == login_session['user_id']:
@@ -298,7 +304,7 @@ def itemHome(item_id):
 #Add a new item
 @app.route('/item/add/', methods=['GET', 'POST'])
 def itemAdd():
-    categories = session.query(Category).all()
+    categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
@@ -342,6 +348,7 @@ def itemEdit(item_id):
 #Delete an Item
 @app.route('/item/<int:item_id>/delete/', methods=['GET', 'POST'])
 def itemDelete(item_id):
+    categories = session.query(Category).order_by(asc(Category.name))
     if 'username' not in login_session:
         return redirect('/login')
     targetItem = session.query(Item).filter_by(id=item_id).one()
