@@ -26,11 +26,12 @@ APP_NAME = 'Item Catalog Application'
 #Create anti-forgery state token
 @app.route('/login')
 def showLogin():
+    categories = session.query(Category).order_by(asc(Category.name))
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in xrange(32))
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
-    return render_template('login.html', STATE=state)
+    return render_template('login.html', STATE=state, categories = categories)
 
 #Google connect
 @csrf.exempt
