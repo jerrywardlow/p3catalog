@@ -1,3 +1,4 @@
+#Flask imports
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, make_response
 from flask import session as login_session
 from flask.ext.seasurf import SeaSurf
@@ -5,20 +6,26 @@ from flask.ext.seasurf import SeaSurf
 #Import content from 'database_model'
 from database_model import *
 
-#SQLAlchemy imports to
+#SQLAlchemy imports
 from sqlalchemy import asc, desc
 from sqlalchemy.orm import sessionmaker
+
 #Create new database session using 'engine' defined in 'database_model'
 Session = sessionmaker(bind=engine)
 session = Session()
 
+#Various Python imports
 import random, string, json, httplib2, requests
 
+#OAuth2 client imports
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
+#Create our Flask web application
 app = Flask(__name__)
+#Pass application to SeaSurf for cross site request forgery prevention
 csrf = SeaSurf(app)
 
+#Load Client ID information from client_secrets.json
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APP_NAME = 'Item Catalog Application'
@@ -33,7 +40,7 @@ def showLogin():
     # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state, categories = categories)
 
-#Google connect
+#Google OAuth2 connection
 @csrf.exempt
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
@@ -147,6 +154,7 @@ def gdisconnect():
 
 #gconnect() helper functions
 def createUser(login_session):
+    '''Create a new User in database from Google user information'''
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
     session.add(newUser)
@@ -155,13 +163,14 @@ def createUser(login_session):
     return user.id
 
 def getUserID(email):
+    '''Find user in database by email address'''
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
     except:
         return None
 
-# Disconnect based on provider
+# Disconnect based on provider. Allows for expansion to other OAuth providers
 @app.route('/disconnect/')
 def disconnect():
     if 'provider' in login_session:
@@ -179,7 +188,7 @@ def disconnect():
         flash("You were not logged in")
         return redirect(url_for('index'))
 
-#Main page - all item categories
+#Main page
 @app.route('/')
 @app.route('/index/')
 def index():
@@ -190,6 +199,7 @@ def index():
                             items = items,
                             privacy_status = privacy_check())
 
+#List of all categories
 @app.route('/categories/')
 def categoryGate():
     categories = session.query(Category).order_by(asc(Category.name))
@@ -408,6 +418,7 @@ def categoryItemsJSON(category_id):
     items = session.query(Item).filter_by(category_id=category_id).all()
     return jsonify(items=[i.serialize for i in items])
 
+#Check to see if user is logged in
 def privacy_check():
     if 'username' in login_session:
         return True
