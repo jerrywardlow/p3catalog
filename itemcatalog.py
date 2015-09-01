@@ -249,12 +249,9 @@ def categoryEdit(category_id):
     if targetCategory.user_id != login_session['user_id']:
         return "<script>function reject() {alert('You do not have permission to edit this Category.');history.go(-1);}</script><body onload='reject()''>"
     if request.method == 'POST':
-        if request.form['name']:
-            targetCategory.name = request.form['name']
-        if request.form['description']:
-            targetCategory.description = request.form['description']
-        if request.form['photo']:
-            targetCategory.photo = request.form['photo']
+        targetCategory.name = request.form['name']
+        targetCategory.description = request.form['description']
+        targetCategory.photo = request.form['photo']
         flash('Category Information Updated')
         return redirect(url_for('categoryHome', category_id = targetCategory.id))
     else:
@@ -344,14 +341,10 @@ def itemEdit(item_id):
     if targetItem.user_id != login_session['user_id']:
         return "<script>function reject() {alert('You do not have permission to edit this Item.');history.go(-1);}</script><body onload='reject()''>"
     if request.method == 'POST':
-        if request.form['category_id']:
-            targetItem.category_id = request.form['category_id']
-        if request.form['name']:
-            targetItem.name = request.form['name']
-        if request.form['description']:
-            targetItem.description = request.form['description']
-        if request.form['photo']:
-            targetItem.photo = request.form['photo']
+        targetItem.category_id = request.form['category_id']
+        targetItem.name = request.form['name']
+        targetItem.description = request.form['description']
+        targetItem.photo = request.form['photo']
         session.add(targetItem)
         session.commit()
         flash('Item Information Updated')
