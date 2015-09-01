@@ -4,13 +4,14 @@
 
 {% block content %}
 
-<h2>Category Home for {{category.name}}</h2>
+<h2>{{category.name}}</h2>
 <hr>
-Category created by {{category.user.name}}</br></br>
 
-Description: {{category.description}}</br></br>
+<div class="col-sm-6">
+  <p>{{category.description}}</p>
+  <p>Created by: {{category.user.name}}</br></br>
 
-Items in {{category.name}}:</br></br>
+
 {% for i in items %}
 {%if i.photo %}
 <div class="thumb" style="background-image: url('{{i.photo}}');" title='{{i.name}}'></div>
@@ -24,10 +25,18 @@ Items in {{category.name}}:</br></br>
 {% if privacy_status %}
 <a style="font-size:90%" href='{{url_for('itemAdd', category_id = category.id)}}'>Add a new item in {{category.name}}</a></br>
 {% if ownership_status %}
-<a style="font-size:90%" href='{{url_for('categoryEdit', category_id = category.id)}}'>Edit Category</a></br>
+<a style="font-size:90%" href='{{url_for('categoryEdit', category_id = category.id)}}'>Edit Category</a>
+|
 <a style="font-size:90%" href='{{url_for('categoryDelete', category_id = category.id)}}'>Delete Category</a></br>
 {% endif %}
 {% endif %}
-<a style="font-size:90%" href='{{url_for('index')}}'>Return to Home</a></br>
+</div>
+
+<div class=pull-right>
+  {% if category.photo %}
+  <img src={{category.photo}} height="200"/></br>
+  {% endif %}
+</div>
+
 
 {% endblock %}

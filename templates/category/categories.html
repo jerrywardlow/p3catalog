@@ -8,7 +8,7 @@
 <hr>
 {% for i in categories %}
 <a style="font-size:120%" href='{{url_for('categoryHome', category_id = i.id)}}'>{{i.name}}</a></br>
-Created by: {{i.user.name}}</br></br>
+{{i.description}}</br></br>
 {% endfor %}
 
 {% endblock %}

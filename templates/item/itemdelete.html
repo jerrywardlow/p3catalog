@@ -14,7 +14,7 @@ Are you sure you want to delete {{item.name}}?</br>
 <input type='submit', value = 'Delete'></br>
 <a style="font-size:90%" href='{{url_for('itemHome', item_id = item.id)}}'>Cancel</a>
 </div>
-<div class =pull-right>
+<div class=pull-right>
   {% if item.photo %}
   <img src={{item.photo}} height="200"/></br>
   {% endif %}
