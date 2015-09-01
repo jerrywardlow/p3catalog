@@ -12,6 +12,7 @@ su vagrant -c 'createdb'
 su vagrant -c 'createdb itemcatalog'
 
 su vagrant -c 'python /vagrant/database_model.py'
+su vagrant -c 'python /vagrant/populator.py'
 
 vagrantTip="[36m[1mTo access project files: cd /vagrant[m"
 echo -e $vagrantTip > /etc/motd
