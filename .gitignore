@@ -1,4 +1,3 @@
-todo.txt
 *.pyc
 .vagrant/
 client_secrets.json
