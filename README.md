@@ -45,9 +45,9 @@ provision the virtual machine required to run this project.
 Now that the Vagrantfile and corresponding configuration file (`ic_config.sh`)
 have finished provisioning our virtual machine, we have an Ubuntu 14.04.3
 environment configured to run the Item Catalog project. All necessary packages
-have been installed, a PostgreSQL database has been created and configured, and
-port 5000 (the port used by this project) has been forwarded correctly. We are
-now ready to SSH into our virtual machine.
+have been installed, a PostgreSQL database has been created, configured and
+populated (by `populator.py`), and port 5000 (the port used by this project) has
+been forwarded correctly. We are now ready to SSH into our virtual machine.
 
 `vagrant ssh`
 
