@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+
+{% block head%}
 <head>
 
   <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
@@ -9,8 +12,9 @@
 <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
 
 </head>
+{% endblock %}
+{% block content %}
 
-<body>
 
 <!-- GOOGLE PLUS SIGN IN-->
 
@@ -64,7 +68,7 @@ function signInCallback(authResult) {
 </script>
 
 <!--END GOOGLE PLUS SIGN IN -->
+{% endblock %}
 
-</body>
 
 </html>
