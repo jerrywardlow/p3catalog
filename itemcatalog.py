@@ -278,14 +278,11 @@ def categoryDelete(category_id):
     if 'username' not in login_session:
         return redirect('/login')
     targetCategory = session.query(Category).filter_by(id=category_id).one()
-    children = session.query(Item).filter_by(category_id=category_id).all()
     if targetCategory.user_id != login_session['user_id']:
         return "<script>function reject() {alert('You do not have permission to delete this Category.');history.go(-1);}</script><body onload='reject()''>"
     if request.method == 'POST':
         session.delete(targetCategory)
         flash('%s Successfully Deleted' % targetCategory.name)
-        for i in children:
-            session.delete(i)
         session.commit()
         return redirect(url_for('index'))
     else:
