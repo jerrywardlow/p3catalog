@@ -4,9 +4,12 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 from datetime import datetime
 
+# Create a new declarative_base for our database model
 Base = declarative_base()
 
+# The following classes create tables in our database
 class User(Base):
+    '''Database table for User information from OAuth provider'''
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
@@ -16,6 +19,7 @@ class User(Base):
 
 
 class Category(Base):
+    '''Table for information about each category'''
     __tablename__ = 'categories'
 
     id = Column(Integer, primary_key=True)
@@ -28,7 +32,7 @@ class Category(Base):
 
     @property
     def serialize(self):
-        """Return object data in easily serializeable format"""
+        '''Return object data in easily serializeable format'''
         return {
             'name': self.name,
             'description': self.description,
@@ -39,6 +43,7 @@ class Category(Base):
         }
 
 class Item(Base):
+    '''Table for information about items'''
     __tablename__ = 'items'
 
     id = Column(Integer, primary_key=True)
@@ -46,14 +51,15 @@ class Item(Base):
     description = Column(String, nullable=False)
     photo = Column(String)
     created = Column(DateTime, default = datetime.now)
-    category_id = Column(Integer, ForeignKey('categories.id', ondelete='CASCADE'))
+    category_id = Column(Integer, ForeignKey('categories.id',
+                                              ondelete='CASCADE'))
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
     category = relationship(Category)
 
     @property
     def serialize(self):
-        """Return object data in easily serializeable format"""
+        '''Return object data in easily serializeable format'''
         return {
             'name': self.name,
             'description': self.description,
@@ -64,5 +70,7 @@ class Item(Base):
             'created': self.created,
         }
 
+# Create a new engine instance for the specified database
 engine = create_engine('postgresql:///itemcatalog')
+# Create the tables and relationships defined in our classes
 Base.metadata.create_all(engine)
