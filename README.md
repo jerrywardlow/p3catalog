@@ -30,6 +30,9 @@ stored in the `static` folder.
 your preferred platform.
 * The files contained in this repository
 
+A detailed list of the Python modules installed during provisioning of our
+Vagrant virtual machine can be found in the included `requirements.txt`.
+
 **Running and Testing This Project**
 
 From a command line, change into the `p3catalog` directory of this project. (For
