@@ -23,6 +23,9 @@ from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 # Import dicttoxml() from dicttoxml
 from dicttoxml import dicttoxml
 
+# Import parseString() to help make XML more readable
+from xml.dom.minidom import parseString
+
 # Create our Flask web application
 app = Flask(__name__)
 # Pass application to SeaSurf for cross site request forgery prevention
@@ -418,6 +421,49 @@ def itemJSON(item_id):
 def categoryItemsJSON(category_id):
     items = session.query(Item).filter_by(category_id=category_id).all()
     return jsonify(items=[i.serialize for i in items])
+
+# XML endpoints
+@app.route('/XML/')
+def aboutXML():
+    categories = session.query(Category).order_by(asc(Category.name))
+    return render_template('XML.html',
+                            categories = categories,
+                            privacy_status = privacy_check())
+
+@app.route('/categories/XML/')
+def categoriesXML():
+    categories = session.query(Category).order_by(asc(Category.name))
+    target = dicttoxml(c.serialize for c in categories)
+    mess = parseString(target)
+    return mess.toprettyxml()
+
+@app.route('/items/XML/')
+def itemsXML():
+    items = session.query(Item).order_by(Item.name)
+    target = dicttoxml(i.serialize for i in items)
+    mess = parseString(target)
+    return mess.toprettyxml()
+
+@app.route('/category/<int:category_id>/XML/')
+def categoryXML(category_id):
+    category = session.query(Category).filter_by(id=category_id).one()
+    target = dicttoxml(category.serialize)
+    mess = parseString(target)
+    return mess.toprettyxml()
+
+@app.route('/item/<int:item_id>/XML/')
+def itemXML(item_id):
+    item = session.query(Item).filter_by(id=item_id).one()
+    target = dicttoxml(item.serialize)
+    mess = parseString(target)
+    return mess.toprettyxml()
+
+@app.route('/category/<int:category_id>/items/XML/')
+def categoryItemsXML(category_id):
+    items = session.query(Item).filter_by(category_id=category_id).all()
+    target = dicttoxml(i.serialize for i in items)
+    mess = parseString(target)
+    return mess.toprettyxml()
 
 # Check to see if user is logged in
 def privacy_check():
