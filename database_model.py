@@ -51,6 +51,7 @@ class Item(Base):
     description = Column(String, nullable=False)
     photo = Column(String)
     created = Column(DateTime, default = datetime.now)
+    # Foreign key relation now deletes child items when category is removed
     category_id = Column(Integer, ForeignKey('categories.id',
                                               ondelete='CASCADE'))
     user_id = Column(Integer, ForeignKey('users.id'))
