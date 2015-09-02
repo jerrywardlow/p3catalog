@@ -392,6 +392,7 @@ def itemDelete(item_id):
 # JSON endpoints
 @app.route('/JSON/')
 def aboutJSON():
+    '''Returns an information page about using the JSON endpoints'''
     categories = session.query(Category).order_by(asc(Category.name))
     return render_template('JSON.html',
                             categories = categories,
@@ -422,9 +423,10 @@ def categoryItemsJSON(category_id):
     items = session.query(Item).filter_by(category_id=category_id).all()
     return jsonify(items=[i.serialize for i in items])
 
-# XML endpoints
+# XML endpoints. Each requires the prettyxml() function
 @app.route('/XML/')
 def aboutXML():
+    '''Returns an information page about using the XML endpoints'''
     categories = session.query(Category).order_by(asc(Category.name))
     return render_template('XML.html',
                             categories = categories,
@@ -433,37 +435,37 @@ def aboutXML():
 @app.route('/categories/XML/')
 def categoriesXML():
     categories = session.query(Category).order_by(asc(Category.name))
-    target = dicttoxml(c.serialize for c in categories)
-    mess = parseString(target)
-    return mess.toprettyxml()
+    return prettyxml(categories)
 
 @app.route('/items/XML/')
 def itemsXML():
     items = session.query(Item).order_by(Item.name)
-    target = dicttoxml(i.serialize for i in items)
-    mess = parseString(target)
-    return mess.toprettyxml()
+    return prettyxml(items)
 
 @app.route('/category/<int:category_id>/XML/')
 def categoryXML(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
-    target = dicttoxml(category.serialize)
-    mess = parseString(target)
-    return mess.toprettyxml()
+    return prettyxml(category)
 
 @app.route('/item/<int:item_id>/XML/')
 def itemXML(item_id):
     item = session.query(Item).filter_by(id=item_id).one()
-    target = dicttoxml(item.serialize)
-    mess = parseString(target)
-    return mess.toprettyxml()
+    return prettyxml(item)
 
 @app.route('/category/<int:category_id>/items/XML/')
 def categoryItemsXML(category_id):
     items = session.query(Item).filter_by(category_id=category_id).all()
-    target = dicttoxml(i.serialize for i in items)
-    mess = parseString(target)
-    return mess.toprettyxml()
+    return prettyxml(items)
+
+# Function to help reduce clutter in XML routes
+def prettyxml(target):
+    '''Takes in a target database object and returns cleanly formatted XML'''
+    try:
+        x = dicttoxml(t.serialize for t in target)
+    except:
+        x = dicttoxml(target.serialize)
+    y = parseString(x)
+    return y.toprettyxml()
 
 # Check to see if user is logged in
 def privacy_check():
