@@ -1,36 +1,36 @@
-#Flask imports
+# Flask imports
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, make_response
 from flask import session as login_session
 from flask.ext.seasurf import SeaSurf
 
-#Import content from 'database_model'
+# Import content from 'database_model'
 from database_model import *
 
-#SQLAlchemy imports
+# SQLAlchemy imports
 from sqlalchemy import asc, desc
 from sqlalchemy.orm import sessionmaker
 
-#Create new database session using 'engine' defined in 'database_model'
+# Create new database session using 'engine' defined in 'database_model'
 Session = sessionmaker(bind=engine)
 session = Session()
 
-#Various Python imports
+# Various Python imports
 import random, string, json, httplib2, requests
 
-#OAuth2 client imports
+# OAuth2 client imports
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
-#Create our Flask web application
+# Create our Flask web application
 app = Flask(__name__)
 #Pass application to SeaSurf for cross site request forgery prevention
 csrf = SeaSurf(app)
 
-#Load Client ID information from client_secrets.json
+# Load Client ID information from client_secrets.json
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APP_NAME = 'Item Catalog Application'
 
-#Create anti-forgery state token
+# Create anti-forgery state token
 @app.route('/login')
 def showLogin():
     categories = session.query(Category).order_by(asc(Category.name))
@@ -40,7 +40,7 @@ def showLogin():
     # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state, categories = categories)
 
-#Google OAuth2 connection
+# Google OAuth2 connection
 @csrf.exempt
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
@@ -114,7 +114,7 @@ def gconnect():
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
-    #check to see if user already exists before creating new one
+    # Check to see if user already exists before creating new one
     user_id = getUserID(login_session['email'])
     if not user_id:
         user_id = createUser(login_session)
@@ -131,7 +131,7 @@ def gconnect():
     print "done!"
     return output
 
-#Pre-disconnect routine for Google connect
+# Pre-disconnect routine for Google connect
 @app.route('/gdisconnect')
 def gdisconnect():
     # Only disconnect a connected user.
@@ -146,13 +146,13 @@ def gdisconnect():
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     if result['status'] != '200':
-        #If, for whatever reason, the given token was invalid.
+        # If, for whatever reason, the given token was invalid.
         response = make_response(
             json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
 
-#gconnect() helper functions
+# gconnect() helper functions
 def createUser(login_session):
     '''Create a new User in database from Google user information'''
     newUser = User(name=login_session['username'], email=login_session[
@@ -188,7 +188,7 @@ def disconnect():
         flash("You were not logged in")
         return redirect(url_for('index'))
 
-#Main page
+# Main page
 @app.route('/')
 @app.route('/index/')
 def index():
@@ -199,7 +199,7 @@ def index():
                             items = items,
                             privacy_status = privacy_check())
 
-#List of all categories
+# List of all categories
 @app.route('/categories/')
 def categoryGate():
     categories = session.query(Category).order_by(asc(Category.name))
@@ -208,7 +208,7 @@ def categoryGate():
                             privacy_status = privacy_check())
 
 
-#Show a specific Category and associated Items
+# Show a specific Category and associated Items
 @app.route('/category/<int:category_id>/')
 @app.route('/category/<int:category_id>/home/')
 def categoryHome(category_id):
@@ -218,9 +218,9 @@ def categoryHome(category_id):
     privacy_status = False
     ownership_status = False
     if 'username' in login_session:
-        privacy_status = True
+        privacy_status = True # Confirm a user is logged in
         if category.user.id == login_session['user_id']:
-            ownership_status = True
+            ownership_status = True # Confirm that user owns the 'category'
     return render_template('category/categoryhome.html',
                             category = category,
                             categories = categories,
@@ -229,7 +229,7 @@ def categoryHome(category_id):
                             ownership_status = ownership_status)
 
 
-#Create a new Category
+# Create a new Category
 @app.route('/category/add/', methods=['GET', 'POST'])
 def categoryAdd():
     categories = session.query(Category).order_by(asc(Category.name))
@@ -249,11 +249,11 @@ def categoryAdd():
                                 categories = categories,
                                 privacy_status = privacy_check())
 
-#Edit a Category
+# Edit a Category
 @app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
 def categoryEdit(category_id):
     categories = session.query(Category).order_by(asc(Category.name))
-    if 'username' not in login_session:
+    if 'username' not in login_session: # Check to see that user is logged in
         return redirect('/login')
     targetCategory = session.query(Category).filter_by(id=category_id).one()
     if targetCategory.user_id != login_session['user_id']:
@@ -263,14 +263,15 @@ def categoryEdit(category_id):
         targetCategory.description = request.form['description']
         targetCategory.photo = request.form['photo']
         flash('Category Information Updated')
-        return redirect(url_for('categoryHome', category_id = targetCategory.id))
+        return redirect(url_for('categoryHome',
+                                 category_id = targetCategory.id))
     else:
         return render_template('category/categoryedit.html',
                                category=targetCategory,
                                privacy_status = privacy_check(),
                                categories = categories)
 
-#Delete a Category
+# Delete a Category
 @app.route('/category/<int:category_id>/delete/', methods=['GET', 'POST'])
 def categoryDelete(category_id):
     categories = session.query(Category).order_by(asc(Category.name))
@@ -293,7 +294,7 @@ def categoryDelete(category_id):
                                privacy_status = privacy_check(),
                                categories = categories)
 
-#MShow all Items
+# Show all Items
 @app.route('/items/')
 def itemGate():
     categories = session.query(Category).order_by(asc(Category.name))
@@ -303,7 +304,7 @@ def itemGate():
                             privacy_status = privacy_check(),
                             categories = categories)
 
-#Show a specific Item
+# Show a specific Item
 @app.route('/item/<int:item_id>/')
 @app.route('/item/<int:item_id>/home/')
 def itemHome(item_id):
@@ -318,7 +319,7 @@ def itemHome(item_id):
                             privacy_status = privacy_check(),
                             categories = categories)
 
-#Add a new item
+# Add a new item
 @app.route('/item/add/', methods=['GET', 'POST'])
 @app.route('/<int:category_id>/item/add/', methods=['GET', 'POST'])
 def itemAdd(category_id):
@@ -341,7 +342,7 @@ def itemAdd(category_id):
                                 privacy_status = privacy_check(),
                                 target = category_id)
 
-#Edit an item
+# Edit an item
 @app.route('/item/<int:item_id>/edit/', methods=['GET', 'POST'])
 def itemEdit(item_id):
     if 'username' not in login_session:
@@ -365,7 +366,7 @@ def itemEdit(item_id):
                                 categories = categories,
                                 privacy_status = privacy_check())
 
-#Delete an Item
+# Delete an Item
 @app.route('/item/<int:item_id>/delete/', methods=['GET', 'POST'])
 def itemDelete(item_id):
     categories = session.query(Category).order_by(asc(Category.name))
@@ -385,7 +386,7 @@ def itemDelete(item_id):
                                 categories = categories,
                                 privacy_status = privacy_check())
 
-#JSON endpoints
+# JSON endpoints
 @app.route('/JSON/')
 def aboutJSON():
     categories = session.query(Category).order_by(asc(Category.name))
@@ -418,7 +419,7 @@ def categoryItemsJSON(category_id):
     items = session.query(Item).filter_by(category_id=category_id).all()
     return jsonify(items=[i.serialize for i in items])
 
-#Check to see if user is logged in
+# Check to see if user is logged in
 def privacy_check():
     if 'username' in login_session:
         return True
