@@ -25,7 +25,7 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(String, nullable=False)
-    photo = Column(String)
+    photo = Column(String) # HTTP link to image instead of image data
     created = Column(DateTime, default = datetime.now)
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
@@ -49,7 +49,7 @@ class Item(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(String, nullable=False)
-    photo = Column(String)
+    photo = Column(String) # HTTP link to image instead of image data
     created = Column(DateTime, default = datetime.now)
     # Foreign key relation now deletes child items when category is removed
     category_id = Column(Integer, ForeignKey('categories.id',
