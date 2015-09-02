@@ -9,7 +9,13 @@ Base = declarative_base()
 
 # The following classes create tables in our database
 class User(Base):
-    '''Database table for User information from OAuth provider'''
+    '''
+    Database table for User information from OAuth provider
+
+    Information is peeled from the Google+ user account stored in the
+    login_session during execution of gconnect() and createUser() in
+    itemcatalog.py when logging into the catalog.
+    '''
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
@@ -32,7 +38,7 @@ class Category(Base):
 
     @property
     def serialize(self):
-        '''Return object data in easily serializeable format'''
+        '''Return object data in easily serializeable format for JSON and XML'''
         return {
             'name': self.name,
             'description': self.description,
@@ -60,7 +66,7 @@ class Item(Base):
 
     @property
     def serialize(self):
-        '''Return object data in easily serializeable format'''
+        '''Return object data in easily serializeable format for JSON and XML'''
         return {
             'name': self.name,
             'description': self.description,
