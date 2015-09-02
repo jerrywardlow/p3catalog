@@ -25,7 +25,7 @@ from dicttoxml import dicttoxml
 
 # Create our Flask web application
 app = Flask(__name__)
-#Pass application to SeaSurf for cross site request forgery prevention
+# Pass application to SeaSurf for cross site request forgery prevention
 csrf = SeaSurf(app)
 
 # Load Client ID information from client_secrets.json
