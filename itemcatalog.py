@@ -20,6 +20,9 @@ import random, string, json, httplib2, requests
 # OAuth2 client imports
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
+# Import dicttoxml() from dicttoxml
+from dicttoxml import dicttoxml
+
 # Create our Flask web application
 app = Flask(__name__)
 #Pass application to SeaSurf for cross site request forgery prevention
