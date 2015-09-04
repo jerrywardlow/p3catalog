@@ -464,8 +464,9 @@ def prettyxml(target):
         x = dicttoxml(t.serialize for t in target)
     except:
         x = dicttoxml(target.serialize)
-    y = parseString(x)
-    return y.toprettyxml()
+    response = make_response(x)
+    response.headers['Content-Type'] = 'application/xml'
+    return response
 
 # Check to see if user is logged in
 def privacy_check():
