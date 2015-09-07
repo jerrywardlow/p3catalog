@@ -26,6 +26,9 @@ from dicttoxml import dicttoxml
 # Import parseString() to help make XML more readable
 from xml.dom.minidom import parseString
 
+# Import the login_required() decorator from 'login_decorator.py'
+from login_decorator import login_required
+
 # Create our Flask web application
 app = Flask(__name__)
 # Pass application to SeaSurf for cross site request forgery prevention
@@ -237,10 +240,9 @@ def categoryHome(category_id):
 
 # Create a new Category
 @app.route('/category/add/', methods=['GET', 'POST'])
+@login_required
 def categoryAdd():
     categories = session.query(Category).order_by(asc(Category.name))
-    if 'username' not in login_session:
-        return redirect('/login')
     if request.method == 'POST':
         newCategory = Category(name=request.form['name'],
                                description=request.form['description'],
@@ -257,10 +259,9 @@ def categoryAdd():
 
 # Edit a Category
 @app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
+@login_required
 def categoryEdit(category_id):
     categories = session.query(Category).order_by(asc(Category.name))
-    if 'username' not in login_session: # Check to see that user is logged in
-        return redirect('/login')
     targetCategory = session.query(Category).filter_by(id=category_id).one()
     if targetCategory.user_id != login_session['user_id']:
         return "<script>function reject() {alert('You do not have permission to edit this Category.');history.go(-1);}</script><body onload='reject()''>"
@@ -279,10 +280,9 @@ def categoryEdit(category_id):
 
 # Delete a Category
 @app.route('/category/<int:category_id>/delete/', methods=['GET', 'POST'])
+@login_required
 def categoryDelete(category_id):
     categories = session.query(Category).order_by(asc(Category.name))
-    if 'username' not in login_session:
-        return redirect('/login')
     targetCategory = session.query(Category).filter_by(id=category_id).one()
     if targetCategory.user_id != login_session['user_id']:
         return "<script>function reject() {alert('You do not have permission to delete this Category.');history.go(-1);}</script><body onload='reject()''>"
@@ -325,10 +325,9 @@ def itemHome(item_id):
 # Add a new item
 @app.route('/item/add/', methods=['GET', 'POST'])
 @app.route('/<int:category_id>/item/add/', methods=['GET', 'POST'])
+@login_required
 def itemAdd(category_id):
     categories = session.query(Category).order_by(asc(Category.name))
-    if 'username' not in login_session:
-        return redirect('/login')
     if request.method == 'POST':
         newItem = Item(name=request.form['name'],
                        description=request.form['description'],
@@ -347,9 +346,8 @@ def itemAdd(category_id):
 
 # Edit an item
 @app.route('/item/<int:item_id>/edit/', methods=['GET', 'POST'])
+@login_required
 def itemEdit(item_id):
-    if 'username' not in login_session:
-        return redirect('/login')
     targetItem = session.query(Item).filter_by(id=item_id).one()
     categories = session.query(Category).order_by(asc(Category.name))
     if targetItem.user_id != login_session['user_id']:
@@ -371,10 +369,9 @@ def itemEdit(item_id):
 
 # Delete an Item
 @app.route('/item/<int:item_id>/delete/', methods=['GET', 'POST'])
+@login_required
 def itemDelete(item_id):
     categories = session.query(Category).order_by(asc(Category.name))
-    if 'username' not in login_session:
-        return redirect('/login')
     targetItem = session.query(Item).filter_by(id=item_id).one()
     if targetItem.user_id != login_session['user_id']:
         return "<script>function reject() {alert('You do not have permission to delete this Item.');history.go(-1);}</script><body onload='reject()''>"
