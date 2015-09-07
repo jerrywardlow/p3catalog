@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import request, redirect, url_for
+from flask import redirect
 from flask import session as login_session
 
 def login_required(f):
