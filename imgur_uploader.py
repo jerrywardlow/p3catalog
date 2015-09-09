@@ -12,6 +12,12 @@ def imgur_upload(target_file):
                              method='POST',
                              params={'image': data})
     try:
-        return image.link
+        return image['link']
     except:
         return None
+
+def imgur_small_square(link):
+    return link[:-4] + 's' + link[-4:]
+
+def imgur_medium_thumb(link):
+    return link[:-4] + 'm' + link[-4:]
