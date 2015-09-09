@@ -271,7 +271,8 @@ def categoryEdit(category_id):
     if request.method == 'POST':
         targetCategory.name = request.form['name']
         targetCategory.description = request.form['description']
-        targetCategory.photo = request.form['photo']
+        if request.files['image']:
+            targetCategory.photo = imgur_upload(request.files['image'])
         flash('Category Information Updated')
         return redirect(url_for('categoryHome',
                                  category_id = targetCategory.id))
@@ -359,7 +360,8 @@ def itemEdit(item_id):
         targetItem.category_id = request.form['category_id']
         targetItem.name = request.form['name']
         targetItem.description = request.form['description']
-        targetItem.photo = request.form['photo']
+        if request.files['image']:
+            targetItem.photo = imgur_upload(request.files['image'])
         session.add(targetItem)
         session.commit()
         flash('Item Information Updated')
