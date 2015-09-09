@@ -30,7 +30,7 @@ from xml.dom.minidom import parseString
 from login_decorator import login_required
 
 # Import new_upload() from 'imgur_uploader.py' to allow Imgur uploads
-from imgur_uploader import imgur_upload
+from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
 
 # Create our Flask web application
 app = Flask(__name__)
