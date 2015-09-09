@@ -7,7 +7,7 @@
 <h2>{{category.name}}</h2>
 <hr>
 
-<div class="col-sm-6">
+<div class="col-sm-4">
   <p>{{category.description}}</p>
   <p>Created by: {{category.user.name}}</br></br>
 
@@ -18,7 +18,7 @@
 {% else %}
 <img src=/static/noimg.png height=90px title='{{i.name}}'>
 {% endif %}
-<a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
+</br><a style="font-size:120%" href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a>
 </br></br>
 {% endfor %}
 

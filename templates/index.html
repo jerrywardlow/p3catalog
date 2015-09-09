@@ -13,7 +13,7 @@
 {% else %}
 <img src=/static/noimg.png height=90px title='{{i.name}}'>
 {% endif %}
-<a href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a></br></br>
+</br><a href='{{url_for('itemHome', item_id = i.id)}}'>{{i.name}}</a></br></br>
 {% endfor %}
 
 {% endblock %}
