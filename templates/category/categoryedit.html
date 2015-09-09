@@ -8,7 +8,7 @@
 <hr>
 
 <div class="col-sm-6">
-<form action = '{{url_for('categoryEdit', category_id = category.id)}}' method = 'POST'>
+<form action = '{{url_for('categoryEdit', category_id = category.id)}}' method = 'POST' enctype=multipart/form-data>
   <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 
 Name:</br>
@@ -17,10 +17,11 @@ Name:</br>
 Category Description:</br>
 <textarea name= 'description' rows='10' cols='50'>{{category.description}}</textarea></br></br>
 
-Photo:</br>
-<input type = 'text' size = '30' name = 'photo' value = '{{category.photo}}'></br>
+Upload New Photo:</br>
+<input type= 'file' name= 'image' accept=image/*></br>
 
-</br><input type = 'submit' value = 'Update'></br>
+</br><input type = 'submit' value = 'Update'>
+<input type= 'reset' value= 'Reset Forms'></br>
 
 </form>
 
