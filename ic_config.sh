@@ -8,6 +8,7 @@ pip install requests
 pip install httplib2
 pip install flask-seasurf
 pip install dicttoxml
+pip install pyimgur
 
 su postgres -c 'createuser -dRS vagrant'
 su vagrant -c 'createdb'
