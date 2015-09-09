@@ -29,7 +29,7 @@ from xml.dom.minidom import parseString
 # Import the login_required() decorator from 'login_decorator.py'
 from login_decorator import login_required
 
-# Import new_upload() from 'imgur_uploader.py' to allow Imgur uploads
+# Import from 'imgur_uploader.py' to allow Imgur uploads and modifiers
 from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
 
 # Create our Flask web application
@@ -471,6 +471,15 @@ def prettyxml(target):
     response = make_response(x)
     response.headers['Content-Type'] = 'application/xml'
     return response
+
+# Allow Imgur modifiers in Jinja templates
+@app.context_processor
+def utility_processor():
+    return dict(imgur_small_square=imgur_small_square)
+
+@app.context_processor
+def utility_processor():
+    return dict(imgur_medium_thumb=imgur_medium_thumb)
 
 # Check to see if user is logged in
 def privacy_check():
