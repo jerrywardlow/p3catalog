@@ -249,7 +249,7 @@ def categoryAdd():
     if request.method == 'POST':
         newCategory = Category(name=request.form['name'],
                                description=request.form['description'],
-                               photo=request.form['photo'],
+                               photo=imgur_upload(request.files['image']),
                                user_id=login_session['user_id'])
         session.add(newCategory)
         flash('New %s Category Successfully Added' % newCategory.name)
@@ -334,7 +334,7 @@ def itemAdd(category_id):
     if request.method == 'POST':
         newItem = Item(name=request.form['name'],
                        description=request.form['description'],
-                       photo=request.form['photo'],
+                       photo=imgur_upload(request.files['image']),
                        category_id=request.form['category_id'],
                        user_id=login_session['user_id'])
         session.add(newItem)
