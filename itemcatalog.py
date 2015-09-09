@@ -29,6 +29,9 @@ from xml.dom.minidom import parseString
 # Import the login_required() decorator from 'login_decorator.py'
 from login_decorator import login_required
 
+# Import new_upload() from 'imgur_uploader.py' to allow Imgur uploads
+from imgur_uploader import new_upload
+
 # Create our Flask web application
 app = Flask(__name__)
 # Pass application to SeaSurf for cross site request forgery prevention
