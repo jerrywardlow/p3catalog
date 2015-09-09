@@ -11,4 +11,7 @@ def imgur_upload(target_file):
     image = client._send_request('https://api.imgur.com/3/image',
                              method='POST',
                              params={'image': data})
-    return image.link
+    try:
+        return image.link
+    except:
+        return None
