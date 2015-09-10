@@ -29,6 +29,9 @@ from xml.dom.minidom import parseString
 # Import the login_required() decorator from 'login_decorator.py'
 from login_decorator import login_required
 
+# Import configuration from website_config.py
+import website_config as config
+
 # Import from 'imgur_uploader.py' to allow Imgur uploads and modifiers
 from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
 
@@ -36,11 +39,6 @@ from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
 app = Flask(__name__)
 # Pass application to SeaSurf for cross site request forgery prevention
 csrf = SeaSurf(app)
-
-# Load Client ID information from client_secrets.json
-CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
-APP_NAME = 'Item Catalog Application'
 
 # Create anti-forgery state token
 @app.route('/login')
@@ -50,7 +48,10 @@ def showLogin():
                     for x in xrange(32))
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
-    return render_template('login.html', STATE=state, categories = categories)
+    return render_template('login.html',
+                            STATE=state,
+                            CLIENT_ID=config.CLIENT_ID,
+                            categories = categories)
 
 # Google OAuth2 connection
 @csrf.exempt
@@ -66,7 +67,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets(config.CLIENT_SECRETS, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -95,7 +96,7 @@ def gconnect():
         return response
 
     # Verify that the access token is valid for this app.
-    if result['issued_to'] != CLIENT_ID:
+    if result['issued_to'] != config.CLIENT_ID:
         response = make_response(
             json.dumps("Token's client ID does not match app's."), 401)
         print "Token's client ID does not match app's."
