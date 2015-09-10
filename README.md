@@ -80,14 +80,21 @@ add new 'OAuth 2.0 client ID' credentials. Our application type is a 'Web
 application'. 'Authorized JavaScript origins' are `http://localhost:5000` and
 'Authorized redirect URIs' are `http://localhost:5000/oauth2callback`. Now we
 can download a JSON file of this information, rename it to `client_secrets.json`
-and move this file to the root of our project (`/p3catalog/`). Finally we must
-update line 24 of `login.html` in our `/p3catalog/templates/` directory,
-changing `data-clientid="CLIENT_ID"` to your newly generated Client ID.
+and move this file to the root of our project (`/p3catalog/`).
 
 Now that we have updated the Item Catalog project with OAuth 2.0 credentials
 from Google, the full functionality of adding, editing, and deleting items and
 categories can be used. Items and categories can be created by any logged in
 user, and users may edit and delete any objects that they have created.
+
+**Setting Up Imgur API Access**
+
+Image hosting is handled through Imgur using their API. Requests are handled
+using the PyImgur library. To use this API, we must register the application
+with Imgur's [API Application Registration Page.](https://api.imgur.com/oauth2/addclient)
+Setting the Authorization callback URL to localhost:5000 will let us properly
+use Imgur's uploads and hosting. Upon successful registration of an application,
+we can add the `client_id` key to `website_config.py` under `IMGUR_CLIENT_ID`.
 
 **Cleaning Up**
 
