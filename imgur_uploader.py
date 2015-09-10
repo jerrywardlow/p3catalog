@@ -2,7 +2,7 @@ from flask import request
 from base64 import b64encode
 import pyimgur
 
-IMGUR_CLIENT_ID = 'PLACE IMGUR CLIENT ID HERE'
+from website_config import IMGUR_CLIENT_ID
 
 def imgur_upload(target_file):
     '''Reads and encodes the target file before uploading to Imgur'''
