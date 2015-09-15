@@ -15,7 +15,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 # Various Python imports
-import random, string, json, httplib2, requests
+import random, string, json, httplib2, requests, sys
 
 # OAuth2 client imports
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
@@ -29,8 +29,18 @@ from xml.dom.minidom import parseString
 # Import the login_required() decorator from 'login_decorator.py'
 from login_decorator import login_required
 
-# Import configuration from website_config.py
-import website_config as config
+# Import website configuration
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-c', '--config', help='Load an atypical configuration')
+if parser.parse_args().config == 'test':
+    import test_config as config
+else:
+    try:
+        import website_config as config
+    except KeyError:
+        print 'Please update website_config.py. See README for more information'
+        sys.exit
 
 # Import from 'imgur_uploader.py' to allow Imgur uploads and modifiers
 from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
