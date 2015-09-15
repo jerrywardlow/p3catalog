@@ -39,8 +39,9 @@ else:
     try:
         import website_config as config
     except KeyError:
-        print 'Please update website_config.py. See README for more information'
-        sys.exit
+        print '***Please update website_config.py.***'
+        print 'See README for information about updating the configuration.'
+        sys.exit()
 
 # Import from 'imgur_uploader.py' to allow Imgur uploads and modifiers
 from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
@@ -262,7 +263,7 @@ def categoryAdd():
                                description=request.form['description'],
                                user_id=login_session['user_id'])
         if request.files['image']:
-            newCategory.photo = imgur_upload(request.files['image'], IMGUR_CLIENT_ID)
+            newCategory.photo = imgur_upload(request.files['image'], config.IMGUR_CLIENT_ID)
         session.add(newCategory)
         flash('New %s Category Successfully Added' % newCategory.name)
         session.commit()
@@ -284,7 +285,7 @@ def categoryEdit(category_id):
         targetCategory.name = request.form['name']
         targetCategory.description = request.form['description']
         if request.files['image']:
-            targetCategory.photo = imgur_upload(request.files['image'], IMGUR_CLIENT_ID)
+            targetCategory.photo = imgur_upload(request.files['image'], config.IMGUR_CLIENT_ID)
         flash('Category Information Updated')
         return redirect(url_for('categoryHome',
                                  category_id = targetCategory.id))
@@ -350,7 +351,7 @@ def itemAdd(category_id):
                        category_id=request.form['category_id'],
                        user_id=login_session['user_id'])
         if request.files['image']:
-            newItem.photo=imgur_upload(request.files['image'], IMGUR_CLIENT_ID)
+            newItem.photo=imgur_upload(request.files['image'], config.IMGUR_CLIENT_ID)
         session.add(newItem)
         flash('%s Successfully Added' % newItem.name)
         session.commit()
@@ -374,7 +375,7 @@ def itemEdit(item_id):
         targetItem.name = request.form['name']
         targetItem.description = request.form['description']
         if request.files['image']:
-            targetItem.photo = imgur_upload(request.files['image'], IMGUR_CLIENT_ID)
+            targetItem.photo = imgur_upload(request.files['image'], config.IMGUR_CLIENT_ID)
         session.add(targetItem)
         session.commit()
         flash('Item Information Updated')
