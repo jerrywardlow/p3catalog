@@ -23,9 +23,6 @@ from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 # Import dicttoxml() from dicttoxml
 from dicttoxml import dicttoxml
 
-# Import parseString() to help make XML more readable
-from xml.dom.minidom import parseString
-
 # Import the login_required() decorator from 'login_decorator.py'
 from login_decorator import login_required
 
