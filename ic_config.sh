@@ -14,10 +14,10 @@ su postgres -c 'createuser -dRS vagrant'
 su vagrant -c 'createdb'
 su vagrant -c 'createdb itemcatalog'
 
-su vagrant -c 'python /vagrant/database_model.py'
-su vagrant -c 'python /vagrant/populator.py'
+su vagrant -c 'python /itemcatalog/database_model.py'
+su vagrant -c 'python /itemcatalog/populator.py'
 
-echo 'cd /vagrant' > /home/vagrant/.bash_profile
+echo 'cd /itemcatalog' > /home/vagrant/.bash_profile
 
 vagrantTip="[36m[1mTo load Item Catalog: 'python itemcatalog.py'[m"
 echo -e $vagrantTip > /etc/motd
