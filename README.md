@@ -54,10 +54,8 @@ been forwarded correctly. We are now ready to SSH into our virtual machine.
 
 `vagrant ssh`
 
-Now that we are logged into the virtual environment, we can change into the
-shared file directory and load our web application.
+Now that we are logged into the virtual environment, we can load our web application.
 
-`cd /vagrant`
 `python itemcatalog.py`
 
 This command will start our Flask web application. Turning our attention to a
