@@ -31,7 +31,11 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--config', help='Load an atypical configuration')
 if parser.parse_args().config == 'test':
-    import test_config as config
+    try:
+        import test_config as config
+    except KeyError:
+        print 'Config file not found.'
+        print 'Update website_config.py instead of using test'
 else:
     try:
         import website_config as config
