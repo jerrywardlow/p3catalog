@@ -1,7 +1,7 @@
 # Flask imports
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, make_response
 from flask import session as login_session
-from flask.ext.seasurf import SeaSurf
+from flask_seasurf import SeaSurf
 
 # Import content from 'database_model'
 from database_model import *
