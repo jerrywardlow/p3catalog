@@ -1,14 +1,8 @@
 apt-get -qqy update
 apt-get -qqy install postgresql python-psycopg2
 apt-get -qqy install python-pip
-pip install flask
-pip install sqlalchemy
-pip install oauth2client
-pip install requests
-pip install httplib2
-pip install flask-seasurf
-pip install dicttoxml
-pip install pyimgur
+
+pip install -r /itemcatalog/requirements.txt
 
 su postgres -c 'createuser -dRS vagrant'
 su vagrant -c 'createdb'
