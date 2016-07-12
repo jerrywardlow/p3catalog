@@ -36,6 +36,7 @@ if parser.parse_args().config == 'test':
     except KeyError:
         print 'Config file not found.'
         print 'Update website_config.py instead of using test'
+        sys.exit()
 else:
     try:
         import website_config as config
