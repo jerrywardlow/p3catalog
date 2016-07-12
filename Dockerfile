@@ -23,9 +23,9 @@ RUN service postgresql start \
 
 USER flaskapp
 
-RUN createdb itemcatalog
-
-RUN python database_model.py \
+RUN service postgresql start \
+        && createdb itemcatalog \
+        && python database_model.py \
         && python populator.py
 
 EXPOSE 5000
