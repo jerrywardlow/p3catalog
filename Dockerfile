@@ -29,6 +29,4 @@ RUN createdb itemcatalog
 RUN python database_model.py \
         && python populator.py
 
-RUN python itemcatalog.py
-
 EXPOSE 5000
