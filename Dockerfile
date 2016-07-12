@@ -10,4 +10,6 @@ RUN apt-get update \
 COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 
+RUN service postgresql start
+
 EXPOSE 5000
