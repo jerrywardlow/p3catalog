@@ -18,4 +18,11 @@ USER postgres
 
 RUN createuser -dRS flaskapp
 
+USER flaskapp
+
+RUN createdb itemcatalog
+
+RUN python database_model.py \
+        && python populator.py
+
 EXPOSE 5000
