@@ -14,4 +14,8 @@ RUN pip install -r /tmp/requirements.txt
 
 RUN service postgresql start
 
+USER postgres
+
+RUN createuser -dRS flaskapp
+
 EXPOSE 5000
