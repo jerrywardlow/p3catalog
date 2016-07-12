@@ -33,7 +33,7 @@ parser.add_argument('-c', '--config', help='Load an atypical configuration')
 if parser.parse_args().config == 'test':
     try:
         import test_config as config
-    except KeyError:
+    except ImportError:
         print 'Config file not found.'
         print 'Update website_config.py instead of using test'
         sys.exit()
