@@ -16,11 +16,10 @@ COPY . /itemcatalog
 
 WORKDIR /itemcatalog
 
-RUN service postgresql start
-
 USER postgres
 
-RUN createuser -dRS flaskapp
+RUN service postgresql start \
+        && createuser -dRS flaskapp
 
 USER flaskapp
 
