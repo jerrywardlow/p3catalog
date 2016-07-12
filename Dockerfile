@@ -12,6 +12,10 @@ RUN useradd flaskapp
 COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 
+COPY . /itemcatalog
+
+WORKDIR /itemcatalog
+
 RUN service postgresql start
 
 USER postgres
