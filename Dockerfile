@@ -6,3 +6,6 @@ RUN apt-get update \
                    python \
                    python-pip \
                    python-psycopg2
+
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
