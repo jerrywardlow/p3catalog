@@ -7,6 +7,8 @@ RUN apt-get update \
                    python-pip \
                    python-psycopg2
 
+RUN useradd flaskapp
+
 COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 
