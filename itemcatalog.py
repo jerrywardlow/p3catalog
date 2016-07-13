@@ -33,17 +33,17 @@ parser.add_argument('-c', '--config', help='Load an atypical configuration')
 if parser.parse_args().config == 'test':
     try:
         import test_config as config
+        CONFIG_FLAG = True
     except ImportError:
         print 'Config file not found.'
         print 'Update website_config.py instead of using test'
         sys.exit()
 else:
-    try:
-        import website_config as config
-    except KeyError:
-        print '***Please update website_config.py.***'
-        print 'See README for information about updating the configuration.'
-        sys.exit()
+    import website_config as config
+    if config.CLIENT_ID:
+        CONFIG_FLAG = True
+    else:
+        CONFIG_FLAG = False
 
 # Import from 'imgur_uploader.py' to allow Imgur uploads and modifiers
 from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
@@ -57,14 +57,18 @@ csrf = SeaSurf(app)
 @app.route('/login')
 def showLogin():
     categories = session.query(Category).order_by(asc(Category.name))
-    state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-                    for x in xrange(32))
-    login_session['state'] = state
-    # return "The current session state is %s" % login_session['state']
-    return render_template('login.html',
-                            STATE=state,
-                            CLIENT_ID=config.CLIENT_ID,
-                            categories = categories)
+    if CONFIG_FLAG:
+        state = ''.join(random.choice(string.ascii_uppercase + string.digits)
+                        for x in xrange(32))
+        login_session['state'] = state
+        # return "The current session state is %s" % login_session['state']
+        return render_template('login.html',
+                                STATE=state,
+                                CLIENT_ID=config.CLIENT_ID,
+                                categories = categories)
+    else:
+        return render_template('login404.html',
+                                categories = categories)
 
 # Google OAuth2 connection
 @csrf.exempt
