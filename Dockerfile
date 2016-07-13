@@ -9,7 +9,11 @@ RUN apt-get update \
                    python-psycopg2
 
 # Add a new user for the web app
-RUN useradd flaskapp
+RUN useradd flaskapp \
+        && adduser flaskapp sudo \
+        && sed -i -e \
+           's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' \
+           /etc/sudoers
 
 # Install pip packages
 COPY requirements.txt /tmp/
@@ -29,10 +33,10 @@ RUN service postgresql start \
 USER flaskapp
 
 # Create database for web app and populate it
-RUN service postgresql start \
-        && createdb itemcatalog \
-        && python database_model.py \
-        && python populator.py
+RUN sudo service postgresql start \
+      && createdb itemcatalog \
+      && python database_model.py \
+      && python populator.py
 
 # Expose port for Flask server
 EXPOSE 5000
