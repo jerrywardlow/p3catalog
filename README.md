@@ -98,3 +98,12 @@ we can add the `client_id` key to `website_config.py` under `IMGUR_CLIENT_ID`.
 If we decided to get messy and poke around in the running VM, we can now `exit`
 our virtual machine and run `vagrant destroy` to remove all traces of the
 Vagrant environment.
+
+### Docker
+
+`docker build -t itemcatalog:latest .`
+`docker run -d -p 5000:5000 itemcatalog`
+
+Navigate to `localhost:5000` in your web browser... wow, that's neat! Shouldn't
+we peel off the PostgreSQL server into another container, and maybe dump this
+all behind NGINX? Wouldn't docker-compose make more sense here? Alright...
