@@ -102,6 +102,7 @@ Vagrant environment.
 ### Docker
 
 `docker build -t itemcatalog:latest .`
+
 `docker run -d -p 5000:5000 itemcatalog`
 
 Navigate to `localhost:5000` in your web browser... wow, that's neat! Shouldn't
