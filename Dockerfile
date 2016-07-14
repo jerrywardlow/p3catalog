@@ -43,3 +43,5 @@ RUN sudo service postgresql start \
 
 # Expose port for Flask server
 EXPOSE 5000
+
+CMD sudo service postgresql start && gunicorn -b 0.0.0.0:5000 wsgi:app
