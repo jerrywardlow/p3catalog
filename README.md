@@ -50,20 +50,19 @@ have finished provisioning our virtual machine, we have an Ubuntu 14.04.3
 environment configured to run the Item Catalog project. All necessary packages
 have been installed, a PostgreSQL database has been created, configured and
 populated (by `populator.py`), and port 5000 (the port used by this project) has
-been forwarded correctly. We are now ready to SSH into our virtual machine.
+been forwarded correctly. Gunicorn is installed as well to handle our Flask
+application.
 
-`vagrant ssh`
+An Upstart configuration file (`app/itemcatalog.conf`) is copied to our virtual
+machine's `/etc/init/` directory allowing Gunicorn to automatically start the
+Flask Item Catalog on port 5000. Feel free to run `vagrant ssh` to poke around
+in our new server.
 
-Now that we are logged into the virtual environment, we can load our web application.
-
-`python itemcatalog.py`
-
-This command will start our Flask web application. Turning our attention to a
-web browser, we can navigate to `http://localhost:5000/` and see the web
-application running correctly. We can view categories and their associated items
-and access JSON formatted information as well. Each requested page is generated
-dynamically using the Flask application's Werkzeug WSGI library and Jinja2
-templates.
+Turning our attention to a web browser, we can navigate to
+`http://localhost:5000/` and see the web application running correctly. We can
+view categories and their associated items and access JSON formatted information
+as well. Each requested page is generated dynamically using the Flask
+application's Werkzeug WSGI library and Jinja2 templates.
 
 At this point, however, we do not have access to one of the core components of
 this project, OAuth.
@@ -96,6 +95,6 @@ we can add the `client_id` key to `website_config.py` under `IMGUR_CLIENT_ID`.
 
 **Cleaning Up**
 
-The web application can be terminated from the command line with `ctrl+c`. We
-can now `exit` our virtual machine and run `vagrant destroy` to remove all
-traces of the Vagrant environment.
+If we decided to get messy and poke around in the running VM, we can now `exit`
+our virtual machine and run `vagrant destroy` to remove all traces of the
+Vagrant environment.
