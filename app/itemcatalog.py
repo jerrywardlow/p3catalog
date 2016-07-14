@@ -27,18 +27,10 @@ from dicttoxml import dicttoxml
 from login_decorator import login_required
 
 # Import website configuration
-import argparse
-parser = argparse.ArgumentParser()
-parser.add_argument('-c', '--config', help='Load an atypical configuration')
-if parser.parse_args().config == 'test':
-    try:
-        import test_config as config
-        CONFIG_FLAG = True
-    except ImportError:
-        print 'Config file not found.'
-        print 'Update website_config.py instead of using test'
-        sys.exit()
-else:
+try:
+    import test_config as config
+    CONFIG_FLAG = True
+except ImportError:
     import website_config as config
     if config.CLIENT_ID:
         CONFIG_FLAG = True
