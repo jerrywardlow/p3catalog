@@ -50,6 +50,11 @@ from imgur_uploader import imgur_upload, imgur_small_square, imgur_medium_thumb
 
 # Create our Flask web application
 app = Flask(__name__)
+
+# Apply some configuration to our app
+app.secret_key = config.SECRET_KEY
+app.debug = config.DEBUG
+
 # Pass application to SeaSurf for cross site request forgery prevention
 csrf = SeaSurf(app)
 
@@ -505,8 +510,5 @@ def privacy_check():
         return True
     return False
 
-
 if __name__ == '__main__':
-    app.secret_key = config.SECRET_KEY
-    app.debug = config.DEBUG
     app.run(host = '0.0.0.0', port = 5000)
