@@ -9,3 +9,4 @@ oauth2client==2.2.0
 psycopg2==2.4.5
 pyimgur==0.5.3
 requests==2.2.1
+gunicorn

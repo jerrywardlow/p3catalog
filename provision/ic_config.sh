@@ -5,7 +5,6 @@ apt-get -qqy install postgresql python-psycopg2 python-pip
 
 # Install Python packages
 pip install -r /itemcatalog/requirements.txt
-pip install gunicorn
 
 # Create new PostgreSQL user and databases
 su postgres -c 'createuser -dRS vagrant'
