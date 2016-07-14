@@ -11,6 +11,9 @@ su vagrant -c 'createdb itemcatalog'
 su vagrant -c 'python /itemcatalog/database_model.py'
 su vagrant -c 'python /itemcatalog/populator.py'
 
+cp /itemcatalog/itemcatalog.conf /etc/init/
+start itemcatalog
+
 echo 'cd /itemcatalog' > /home/vagrant/.bash_profile
 
 vagrantTip="[36m[1mTo load Item Catalog: 'python itemcatalog.py'[m"
