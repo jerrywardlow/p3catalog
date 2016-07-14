@@ -19,11 +19,11 @@ RUN useradd flaskapp \
            /etc/sudoers
 
 # Install pip packages
-COPY requirements.txt /tmp/
+COPY app/requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 
 # Copy all project files to container
-COPY . /itemcatalog
+COPY app/ /itemcatalog
 
 WORKDIR /itemcatalog
 
