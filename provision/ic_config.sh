@@ -2,6 +2,7 @@ apt-get -qqy update
 apt-get -qqy install postgresql python-psycopg2 python-pip
 
 pip install -r /itemcatalog/requirements.txt
+pip install gunicorn
 
 su postgres -c 'createuser -dRS vagrant'
 su vagrant -c 'createdb'
