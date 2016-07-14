@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 
 # Turn off some annoying warnings while installing packages
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+ENV DEBIAN_FRONTEND noninteractive
 
 # Install basic packages needed for the Flask web app
 RUN apt-get update \
