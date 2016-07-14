@@ -16,5 +16,5 @@ start itemcatalog
 
 echo 'cd /itemcatalog' > /home/vagrant/.bash_profile
 
-vagrantTip="[36m[1mTo load Item Catalog: 'python itemcatalog.py'[m"
+vagrantTip="[36m[1mItem Catalog running on 'localhost:5000'[m"
 echo -e $vagrantTip > /etc/motd
