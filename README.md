@@ -107,4 +107,11 @@ Vagrant environment.
 
 Navigate to `localhost:5000` in your web browser... wow, that's neat! Shouldn't
 we peel off the PostgreSQL server into another container, and maybe dump this
-all behind NGINX? Wouldn't docker-compose make more sense here? Alright...
+all behind NGINX? Wouldn't docker-compose make more sense here? Valid points...
+
+##### Even Less Docker?
+
+Need something with less PostgreSQL and more SQLite? Hate Gunicorn? Looking for
+an 81% reduction in image size and an 81% reduction in stability?
+
+`docker run -d -p 5000:5000 jerrywardlow/alpine-catalog`
