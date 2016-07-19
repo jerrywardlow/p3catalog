@@ -111,7 +111,8 @@ all behind NGINX? Wouldn't docker-compose make more sense here? Valid points...
 
 ##### Even Less Docker?
 
-Need something with less PostgreSQL and more SQLite? Hate Gunicorn? Looking for
+Need [something](https://github.com/jerrywardlow/docker-playground/blob/master/alpine-catalog/Dockerfile)
+with less PostgreSQL and more SQLite? Hate Gunicorn? Looking for
 an 81% reduction in image size and an 81% reduction in stability?
 
 `docker run -d -p 5000:5000 jerrywardlow/alpine-catalog`
