@@ -78,6 +78,11 @@ class Item(Base):
         }
 
 # Create a new engine instance for the specified database
-engine = create_engine('postgresql:///itemcatalog')
+db_driver = 'postgresql'
+db_host = ''
+db_name = 'itemcatalog'
+uri = db_driver + '://' + db_host + '/' + db_name
+engine = create_engine(uri)
+#engine = create_engine('postgresql:///itemcatalog')
 # Create the tables and relationships defined in our classes
 Base.metadata.create_all(engine)
