@@ -2,6 +2,9 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
+    if Vagrant.has_plugin?("vagrant-hostmanager")
+        config.hostmanager.enabled = True
+    end
     config.vm.provision "shell", path: "provision/ic_config.sh"
     config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = "p3catalog"
