@@ -77,12 +77,20 @@ class Item(Base):
             'created': self.created,
         }
 
-# Create a new engine instance for the specified database
+# Configuration for database
 db_driver = 'postgresql'
-db_host = ''
+db_user = 'pgdbuser'
+db_password = 'pgpassword'
+db_host = 'postgres'
+db_port = '5432'
 db_name = 'itemcatalog'
-uri = db_driver + '://' + db_host + '/' + db_name
+
+# Generate SQLAlchemy URI from config
+uri = '{0}://{1}:{2}@{3}:{4}/{5}'.format(
+    db_driver, db_user, db_password, db_host, db_port, db_name
+)
+
+# Create a new engine instance for the specified database
 engine = create_engine(uri)
-#engine = create_engine('postgresql:///itemcatalog')
 # Create the tables and relationships defined in our classes
 Base.metadata.create_all(engine)
