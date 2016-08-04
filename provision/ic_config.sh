@@ -1,7 +1,8 @@
 # Update apt cache
 apt-get -qqy update
 # Install project packages
-apt-get -qqy install postgresql python-psycopg2 python-pip
+apt-get -qqy install python-psycopg2 \
+                     python-pip
 
 # Install Python packages
 pip install -r /itemcatalog/requirements.txt
