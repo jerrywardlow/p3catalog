@@ -1,19 +1,44 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure(2) do |config|
-    if Vagrant.has_plugin?("vagrant-hostmanager")
-        config.hostmanager.enabled = true
-    end
-    config.vm.provision "shell", path: "provision/ic_config.sh"
-    config.vm.box = "ubuntu/trusty64"
-    config.vm.hostname = "p3catalog"
-    config.vm.network :private_network, ip: "172.22.22.234"
-    config.vm.network :forwarded_port, guest: 5000, host: 5000
-    config.vm.synced_folder ".", "/vagrant", disabled: true
-    config.vm.synced_folder "app/", "/itemcatalog"
+nodes = [
+  {
+    hostname: "postgres",
+    box: "ubuntu/trusty64",
+    config: "provision/db.sh",
+    ip: "192.168.56.2",
+    port: 5432,
+    synchost: "db/",
+    syncguest: "/db"
+  },
+  {
+    hostname: "app",
+    box: "ubuntu/trusty64",
+    config: "provision/ic_config.sh",
+    ip: "192.168.56.3",
+    port: 5000,
+    synchost: "app/",
+    syncguest: "/itemcatalog"
+  }
+]
 
-    config.vm.provider "virtualbox" do |vb|
-        vb.name = "Item Catalog"
+Vagrant.configure(2) do |config|
+  if Vagrant.has_plugin?("vagrant-hostmanager")
+    config.hostmanager.enabled = true
+  end
+  nodes.each do |node|
+    config.vm.define node[:hostname] do |nodeconfig|
+      nodeconfig.vm.provision :shell, path: node[:config]
+      nodeconfig.vm.box = node[:box]
+      nodeconfig.vm.hostname = node[:hostname]
+      nodeconfig.vm.network :private_network, ip: node[:ip]
+      nodeconfig.vm.network :forwarded_port, guest: node[:port], host: node[:port]
+      nodeconfig.vm.synced_folder ".", "/vagrant", disabled: true
+      nodeconfig.vm.synced_folder node[:syncguest], node[:synhost]
+
+      nodeconfig.vm.provider "virtualbox" do |vb|
+        vb.name = node[:hostname]
+      end
     end
+  end
 end
