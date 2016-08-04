@@ -10,14 +10,13 @@ RUN apt-get update \
                    python-pip \
                    python-psycopg2
 
-# Install pip packages
-COPY app/requirements.txt /tmp/
-RUN pip install -r /tmp/requirements.txt
-
 # Copy all project files to container
 COPY app/ /itemcatalog
 
 WORKDIR /itemcatalog
+
+# Install pip packages
+RUN pip install -r requirements.txt
 
 # Expose port for Flask server
 EXPOSE 5000
