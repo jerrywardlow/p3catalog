@@ -10,13 +10,6 @@ RUN apt-get update \
                    python-pip \
                    python-psycopg2
 
-# Add a new user for the web app
-RUN useradd flaskapp \
-        && adduser flaskapp sudo \
-        && sed -i -e \
-           's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' \
-           /etc/sudoers
-
 # Install pip packages
 COPY app/requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
@@ -25,8 +18,6 @@ RUN pip install -r /tmp/requirements.txt
 COPY app/ /itemcatalog
 
 WORKDIR /itemcatalog
-
-USER flaskapp
 
 # Expose port for Flask server
 EXPOSE 5000
