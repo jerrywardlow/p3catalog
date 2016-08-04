@@ -10,14 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+-- Name: categories; Type: TABLE; Schema: public; Owner: pgdbuser; Tablespace:
 --
 
 CREATE TABLE categories (
@@ -43,10 +43,10 @@ CREATE TABLE categories (
 );
 
 
-ALTER TABLE public.categories OWNER TO vagrant;
+ALTER TABLE public.categories OWNER TO pgdbuser;
 
 --
--- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: pgdbuser
 --
 
 CREATE SEQUENCE categories_id_seq
@@ -57,17 +57,17 @@ CREATE SEQUENCE categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.categories_id_seq OWNER TO vagrant;
+ALTER TABLE public.categories_id_seq OWNER TO pgdbuser;
 
 --
--- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pgdbuser
 --
 
 ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: items; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+-- Name: items; Type: TABLE; Schema: public; Owner: pgdbuser; Tablespace:
 --
 
 CREATE TABLE items (
@@ -81,10 +81,10 @@ CREATE TABLE items (
 );
 
 
-ALTER TABLE public.items OWNER TO vagrant;
+ALTER TABLE public.items OWNER TO pgdbuser;
 
 --
--- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+-- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: pgdbuser
 --
 
 CREATE SEQUENCE items_id_seq
@@ -95,17 +95,17 @@ CREATE SEQUENCE items_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.items_id_seq OWNER TO vagrant;
+ALTER TABLE public.items_id_seq OWNER TO pgdbuser;
 
 --
--- Name: items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+-- Name: items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pgdbuser
 --
 
 ALTER SEQUENCE items_id_seq OWNED BY items.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: pgdbuser; Tablespace:
 --
 
 CREATE TABLE users (
@@ -116,10 +116,10 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE public.users OWNER TO vagrant;
+ALTER TABLE public.users OWNER TO pgdbuser;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: pgdbuser
 --
 
 CREATE SEQUENCE users_id_seq
@@ -130,38 +130,38 @@ CREATE SEQUENCE users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_id_seq OWNER TO vagrant;
+ALTER TABLE public.users_id_seq OWNER TO pgdbuser;
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pgdbuser
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pgdbuser
 --
 
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pgdbuser
 --
 
 ALTER TABLE ONLY items ALTER COLUMN id SET DEFAULT nextval('items_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pgdbuser
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: vagrant
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: pgdbuser
 --
 
 COPY categories (id, name, description, photo, created, user_id) FROM stdin;
@@ -171,14 +171,14 @@ COPY categories (id, name, description, photo, created, user_id) FROM stdin;
 
 
 --
--- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pgdbuser
 --
 
 SELECT pg_catalog.setval('categories_id_seq', 2, true);
 
 
 --
--- Data for Name: items; Type: TABLE DATA; Schema: public; Owner: vagrant
+-- Data for Name: items; Type: TABLE DATA; Schema: public; Owner: pgdbuser
 --
 
 COPY items (id, name, description, photo, created, category_id, user_id) FROM stdin;
@@ -190,14 +190,14 @@ COPY items (id, name, description, photo, created, category_id, user_id) FROM st
 
 
 --
--- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+-- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pgdbuser
 --
 
 SELECT pg_catalog.setval('items_id_seq', 4, true);
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: vagrant
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: pgdbuser
 --
 
 COPY users (id, name, email, picture) FROM stdin;
@@ -206,14 +206,14 @@ COPY users (id, name, email, picture) FROM stdin;
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pgdbuser
 --
 
 SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: pgdbuser; Tablespace:
 --
 
 ALTER TABLE ONLY categories
@@ -221,7 +221,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: items_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+-- Name: items_pkey; Type: CONSTRAINT; Schema: public; Owner: pgdbuser; Tablespace:
 --
 
 ALTER TABLE ONLY items
@@ -229,7 +229,7 @@ ALTER TABLE ONLY items
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: pgdbuser; Tablespace:
 --
 
 ALTER TABLE ONLY users
@@ -237,7 +237,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: categories_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: categories_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pgdbuser
 --
 
 ALTER TABLE ONLY categories
@@ -245,7 +245,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: items_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: items_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pgdbuser
 --
 
 ALTER TABLE ONLY items
@@ -253,7 +253,7 @@ ALTER TABLE ONLY items
 
 
 --
--- Name: items_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+-- Name: items_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pgdbuser
 --
 
 ALTER TABLE ONLY items
@@ -273,4 +273,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
