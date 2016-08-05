@@ -1,0 +1,5 @@
+[db]
+postgres ansible_host=192.168.56.2
+
+[web]
+app ansible_host=192.168.56.3
