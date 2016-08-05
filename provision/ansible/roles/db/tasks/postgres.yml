@@ -21,6 +21,7 @@
     - postgresql-{{ pg_version }}
     - postgresql-contrib-{{ pg_version }}
     - postgresql-client-{{ pg_version }}
+    - python-psycopg2 # Let Ansible do it's thing
 
 - name: Ensure PostgreSQL service is up
   service:
