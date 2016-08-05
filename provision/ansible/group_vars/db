@@ -1,0 +1,14 @@
+---
+
+pg_version: 9.5
+
+# UFW
+ufw_ports:
+  # SSH
+  - port: "22"
+    from: "any"
+    rule: "limit"
+  # PostgreSQL
+  - port: "5432"
+    from: "192.168.56.0/24"
+    rule: "allow"

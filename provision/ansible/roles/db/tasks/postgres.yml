@@ -1,0 +1,30 @@
+---
+
+- name: Add PostgreSQL repository key
+  apt_key:
+    id: ACCC4CF8
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: Add PostgreSQL repository
+  apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"
+    state: present
+
+- name: Install PostgreSQL packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - postgresql-{{ pg_version }}
+    - postgresql-contrib-{{ pg_version }}
+    - postgresql-client-{{ pg_version }}
+    - python-psycopg2 # Let Ansible do it's thing
+
+- name: Ensure PostgreSQL service is up
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
