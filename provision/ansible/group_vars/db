@@ -1,5 +1,7 @@
 ---
 
+pg_version: 9.5
+
 # UFW
 ufw_ports:
   # SSH
