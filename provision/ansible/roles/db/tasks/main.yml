@@ -1,3 +1,4 @@
 ---
 
 - include: postgres.yml
+- include: catalogdb.yml
