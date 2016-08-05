@@ -1,11 +1,10 @@
 FROM alpine:latest
 
 # Install basic packages needed for the Flask web app
-RUN apt-get update \
-        && apt-get install -y --no-install-recommends \
-                   python \
-                   python-pip \
-                   python-psycopg2
+RUN apk update \
+        && apk add python \
+                   py-pip \
+                   py-psycopg2
 
 # Copy all project files to container
 COPY app/ /itemcatalog
