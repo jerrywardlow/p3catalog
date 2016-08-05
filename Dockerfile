@@ -1,8 +1,5 @@
 FROM alpine:latest
 
-# Turn off some annoying warnings while installing packages
-ENV DEBIAN_FRONTEND noninteractive
-
 # Install basic packages needed for the Flask web app
 RUN apt-get update \
         && apt-get install -y --no-install-recommends \
