@@ -14,7 +14,7 @@ nodes = [
   {
     hostname: "app",
     box: "ubuntu/trusty64",
-    config: "provision/shell/ic_config.sh",
+    config: "provision/shell/app.sh",
     ip: "192.168.56.3",
     port: 5000,
     synchost: "app/",
