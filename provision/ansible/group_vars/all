@@ -1,0 +1,10 @@
+# Packages for 'base' role
+base_pacakges:
+  - git
+  - ufw
+  - fail2ban
+
+db_host: "{{ hostvars[groups['db'][0]]['ansible_host'] }}"
+db_user: pgdbuser
+db_name: itemcatalog
+db_password: pgpassword
