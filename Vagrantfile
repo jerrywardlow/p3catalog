@@ -5,7 +5,7 @@ nodes = [
   {
     hostname: "postgres",
     box: "ubuntu/trusty64",
-    config: "provision/db.sh",
+    config: "provision/shell/db.sh",
     ip: "192.168.56.2",
     port: 5432,
     synchost: "db/",
@@ -14,7 +14,7 @@ nodes = [
   {
     hostname: "app",
     box: "ubuntu/trusty64",
-    config: "provision/ic_config.sh",
+    config: "provision/shell/ic_config.sh",
     ip: "192.168.56.3",
     port: 5000,
     synchost: "app/",
