@@ -25,6 +25,8 @@ nodes = [
 Vagrant.configure(2) do |config|
   if Vagrant.has_plugin?("vagrant-hostmanager")
     config.hostmanager.enabled = true
+  else
+    abort("This project relies upon the Vagrant plugin 'vagrant-hostmanager'")
   end
   nodes.each do |node|
     config.vm.define node[:hostname] do |nodeconfig|
