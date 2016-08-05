@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM alpine:latest
 
 # Turn off some annoying warnings while installing packages
 ENV DEBIAN_FRONTEND noninteractive
