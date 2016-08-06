@@ -182,8 +182,9 @@ def gdisconnect():
 # gconnect() helper functions
 def createUser(login_session):
     '''Create a new User in database from Google user information'''
-    newUser = User(name=login_session['username'], email=login_session[
-                   'email'], picture=login_session['picture'])
+    newUser = User(name=login_session['username'],
+                   email=login_session['email'],
+                   picture=login_session['picture'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
