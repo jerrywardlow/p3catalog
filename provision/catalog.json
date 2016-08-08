@@ -15,6 +15,7 @@
     }],
     "provisioners": [{
         "type": "shell",
-        "inline": [ "sleep 30" ]
+        "inline": [ "sleep 30" ],
+        "scripts": [ "shell/app.sh" ]
     }]
 }
