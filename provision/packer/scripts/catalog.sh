@@ -5,7 +5,7 @@ sudo apt-get -qqy update
 sudo apt-get -qqy install python-psycopg2 python-pip git
 
 # Initiate maximum recursion
-sudo git clone -n git://github.com/jerrywardlow/p3catalog.git --depth 1
+sudo git clone -n git://github.com/jerrywardlow/p3catalog.git  --depth 1 /p3catalog
 cd /p3catalog
 sudo git checkout HEAD app/ && sudo rm -rf .git/
 
