@@ -41,22 +41,25 @@ this example, we will assume it is in `/home/user/p3catalog`)
 `cd /home/user/p3catalog`
 
 From this directory we will execute our Vagrantfile which will create and
-provision the virtual machine required to run this project.
+provision the virtual machines required to run this project.
 
 `vagrant up`
 
-Now that the Vagrantfile and corresponding configuration file (`ic_config.sh`)
-have finished provisioning our virtual machine, we have an Ubuntu 14.04.3
+Now that the Vagrantfile and corresponding configuration file (`app.sh`)
+have finished provisioning our virtual machine, we have an Ubuntu 14.04
 environment configured to run the Item Catalog project. All necessary packages
-have been installed, a PostgreSQL database has been created, configured and
-populated (by `populator.py`), and port 5000 (the port used by this project) has
-been forwarded correctly. Gunicorn is installed as well to handle our Flask
+have been installed, and port 5000 (the port used by this project) has been
+forwarded correctly. Gunicorn is installed as well to handle our Flask
 application.
 
 An Upstart configuration file (`app/itemcatalog.conf`) is copied to our virtual
 machine's `/etc/init/` directory allowing Gunicorn to automatically start the
-Flask Item Catalog on port 5000. Feel free to run `vagrant ssh` to poke around
+Flask Item Catalog on port 5000. Feel free to run `vagrant ssh app` to poke around
 in our new server.
+
+The second virtual machine is a fully operational PostgreSQL server with an SQL
+backup loaded. This backup is ripped from the `db_populator` script which loads
+the database with sample data to be used by the application.
 
 Turning our attention to a web browser, we can navigate to
 `http://localhost:5000/` and see the web application running correctly. We can
