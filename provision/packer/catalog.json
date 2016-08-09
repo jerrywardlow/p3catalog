@@ -1,7 +1,8 @@
 {
     "variables": {
         "aws_access_key": "{{env `AWS_KEY`}}",
-        "aws_secret_key": "{{env `AWS_SECRET`}}"
+        "aws_secret_key": "{{env `AWS_SECRET`}}",
+        "digitalocean_access_token": "{{env `DIGITALOCEAN_ACCESS_TOKEN`}}"
     },
     "builders": [{
         "type": "amazon-ebs",
@@ -12,6 +13,13 @@
         "instance_type": "t2.micro",
         "ssh_username": "ubuntu",
         "ami_name": "p3catalog {{timestamp}}"
+    },
+    {
+        "type": "digitalocean",
+        "api_token": "{{user `digitalocean_access_token`}}",
+        "image": "ubuntu-14-04-x64",
+        "region": "sfo2",
+        "size": "512mb"
     }],
     "provisioners": [{
         "type": "shell",
