@@ -21,7 +21,8 @@
         "api_token": "{{user `digitalocean_access_token`}}",
         "image": "ubuntu-14-04-x64",
         "region": "sfo2",
-        "size": "512mb"
+        "size": "512mb",
+        "snapshot_name": "p3catalog-{{timestamp}}"
     }],
     "provisioners": [{
         "type": "shell",
