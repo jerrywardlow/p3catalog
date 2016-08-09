@@ -104,13 +104,9 @@ Vagrant environment.
 
 ### Docker
 
-`docker build -t itemcatalog:latest .`
-
-`docker run -d -p 5000:5000 itemcatalog`
-
-Navigate to `localhost:5000` in your web browser... wow, that's neat! Shouldn't
-we peel off the PostgreSQL server into another container, and maybe dump this
-all behind NGINX? Wouldn't docker-compose make more sense here? Valid points...
+A Docker Compose file is included that will spin up two linked containers, one
+running the web application and one PostgreSQL container loaded with a database
+backup of sample data.
 
 ##### Even Less Docker?
 
