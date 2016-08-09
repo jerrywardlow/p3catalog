@@ -14,7 +14,7 @@ sudo pip install -r app/requirements.txt
 
 # Modify and reuse Vagrant upstart script
 sudo sed -i 's/itemcatalog/p3catalog\/app/' /p3catalog/app/itemcatalog.conf
-sudo sed -i 's/vagrant/ubuntu/' /p3catalog/app/itemcatalog.conf
+sudo sed -i 's/vagrant/'"$USER"'/' /p3catalog/app/itemcatalog.conf
 # Copy upstart script and run Gunicorn
 sudo cp app/itemcatalog.conf /etc/init/
 sudo start itemcatalog
