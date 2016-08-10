@@ -30,7 +30,8 @@
         "account_file": "test.json",
         "project_id": "p3-packer",
         "source_image": "ubuntu-1404-trusty-v20160809a",
-        "zone": "us-west1-a"
+        "zone": "us-west1-a",
+        "image_name": "p3catalog-{{timestamp}}"
     }],
     "provisioners": [{
         "type": "shell",
