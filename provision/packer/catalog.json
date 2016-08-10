@@ -23,6 +23,14 @@
         "region": "sfo2",
         "size": "512mb",
         "snapshot_name": "p3catalog-{{timestamp}}"
+    },
+    {
+        "name": "gce",
+        "type": "googlecompute",
+        "account_file": "test.json",
+        "project_id": "p3-packer",
+        "source_image": "ubuntu-1404-trusty-v20160809a",
+        "zone": "us-west1-a"
     }],
     "provisioners": [{
         "type": "shell",
