@@ -1,5 +1,5 @@
 # Packages for 'base' role
-base_pacakges:
+base_packages:
   - git
   - ufw
   - fail2ban
