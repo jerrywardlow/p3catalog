@@ -6,6 +6,4 @@
     dest: "{{ git_path }}"
 
 - name: Move core project files
-  copy:
-    src: "{{ git_path }}/app/"
-    dest: "/itemcatalog"
+  command: mv "{{ git_path }}/app/" /catalog
