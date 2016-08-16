@@ -2,3 +2,9 @@
 
 git_repo: "https://github.com/jerrywardlow/p3catalog"
 git_path: "/tmp/p3catalog"
+
+#UFW
+ufw_ports:
+  - port: "22"
+    from: "any"
+    rule: "limit"
