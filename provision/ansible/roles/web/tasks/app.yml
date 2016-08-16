@@ -4,3 +4,8 @@
   git:
     repo: "{{ git_repo }}"
     dest: "{{ git_path }}"
+
+- name: Move core project files
+  copy:
+    src: "{{ git_path }}/app/"
+    dest: "/itemcatalog"
