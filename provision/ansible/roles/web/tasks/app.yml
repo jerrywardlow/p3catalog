@@ -1,0 +1,6 @@
+---
+
+- name: Clone project repository
+  git:
+    repo: "{{ git_repo }}"
+    dest: "{{ git_path }}"
