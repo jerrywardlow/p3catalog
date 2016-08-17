@@ -14,7 +14,7 @@ services:
         ports:
             - '5432:5432'
         volumes:
-            - ./db/sample_catalog.sql:/docker-entrypoint-initdb.d/itemcatalog.sql
+            - ./db/postgres.sample_catalog.sql:/docker-entrypoint-initdb.d/itemcatalog.sql
         environment:
             POSTGRES_USER: pgdbuser
             POSTGRES_PASSWORD: pgpassword
