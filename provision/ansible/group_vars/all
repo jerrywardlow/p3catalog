@@ -1,6 +1,6 @@
 # Packages for 'base' role
 base_packages:
-  - git
+  - subversion
   - ufw
   - fail2ban
 
