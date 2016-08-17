@@ -3,4 +3,4 @@
 - name: Clone project repository
   subversion:
     repo: "{{ git_repo }}"
-    dest: "{{ git_path }}"
+    dest: "{{ project_path }}"

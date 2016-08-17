@@ -1,7 +1,7 @@
 ---
 
-git_repo: "https://github.com/jerrywardlow/p3catalog"
-git_path: "/tmp/p3catalog"
+git_repo: "https://github.com/jerrywardlow/p3catalog/trunk/app"
+project_path: "/itemcatalog"
 
 #UFW
 ufw_ports:
