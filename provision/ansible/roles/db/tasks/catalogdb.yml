@@ -5,6 +5,18 @@
     name: "{{ db_name }}"
     state: present
   become_user: postgres
+  register: db_created
+ 
+- name: Pull database backup
+  subversion:
+    repo: "https://github.com/jerrywardlow/p3catalog/trunk/db"
+    dest: "/db"  
+  when: db_created.changed
+
+- name: Import database backup
+  shell: "psql itemcatalog < /db/postgres.sample_catalog.sql"
+  become_user: postgres
+  when: db_created.changed
 
 - name: Create user "{{ db_user }}" and grant access to "{{ db_name }}"
   postgresql_user:
