@@ -28,3 +28,10 @@
     name: postgresql
     state: started
     enabled: yes
+
+- name: Allow remote connections to PostgreSQL from app server
+  lineinfile:
+    dest: /etc/postgresql/{{ pg_version }}/main/pg_hba.conf
+    line: "host all all {{ item }} password"
+    state: present
+  with_items: "{{ hostvars[groups['web'][0]]['ansible_host'] }}"
