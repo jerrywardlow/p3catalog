@@ -1,9 +1,6 @@
 ---
 
 - name: Clone project repository
-  git:
+  subversion:
     repo: "{{ git_repo }}"
     dest: "{{ git_path }}"
-
-- name: Move core project files
-  command: mv "{{ git_path }}/app/" /catalog
