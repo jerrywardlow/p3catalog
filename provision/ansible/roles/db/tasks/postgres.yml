@@ -35,3 +35,9 @@
     line: "host all all {{ item }} password"
     state: present
   with_items: "{{ hostvars[groups['web'][0]]['ansible_host'] }}"
+
+- name: PostgreSQL listen addresses
+  lineinfile:
+    dest: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
+    line: "listen_addresses='{{ ansible_host }}'"
+    state: present
