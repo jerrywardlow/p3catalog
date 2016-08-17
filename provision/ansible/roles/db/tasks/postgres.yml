@@ -32,7 +32,7 @@
 - name: Allow remote connections to PostgreSQL from app server
   lineinfile:
     dest: /etc/postgresql/{{ pg_version }}/main/pg_hba.conf
-    line: "host all all {{ item }} password"
+    line: "host all all {{ item }}/32 password"
     state: present
   with_items: "{{ hostvars[groups['web'][0]]['ansible_host'] }}"
 
