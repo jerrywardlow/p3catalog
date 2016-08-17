@@ -3,7 +3,7 @@
 
 nodes = [
   {
-    hostname: "postgres",
+    hostname: "db",
     box: "ubuntu/trusty64",
     config: "provision/shell/db.sh",
     ip: "192.168.56.2",
@@ -12,7 +12,7 @@ nodes = [
     syncguest: "/db"
   },
   {
-    hostname: "app",
+    hostname: "web",
     box: "ubuntu/trusty64",
     config: "provision/shell/app.sh",
     ip: "192.168.56.3",
