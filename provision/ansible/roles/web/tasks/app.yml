@@ -13,3 +13,8 @@
   shell: cp /itemcatalog/itemcatalog.conf /etc/init
   args:
     creates: /etc/init/itemcatalog.conf
+
+- name: Start itemcatalog service
+  service:
+    name: itemcatalog
+    state: started
