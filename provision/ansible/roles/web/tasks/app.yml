@@ -4,3 +4,7 @@
   subversion:
     repo: "{{ git_repo }}"
     dest: "{{ project_path }}"
+
+- name: Install Python packages
+  pip:
+    requirements: "{{ project_path }}/requirements.txt"
