@@ -8,3 +8,8 @@
 - name: Install Python packages
   pip:
     requirements: "{{ project_path }}/requirements.txt"
+
+- name: Copy upstart script
+  shell: cp /itemcatalog/itemcatalog.conf /etc/init
+  args:
+    creates: /etc/init/itemcatalog.conf
