@@ -8,3 +8,6 @@ ufw_ports:
   - port: "22"
     from: "any"
     rule: "limit"
+  - port: "5000"
+    from: "any"
+    rule: "allow"
