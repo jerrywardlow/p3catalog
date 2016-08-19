@@ -102,6 +102,18 @@ If we decided to get messy and poke around in the running VM, we can now `exit`
 our virtual machine and run `vagrant destroy` to remove all traces of the
 Vagrant environment.
 
+### Ansible
+
+Ansible can also be used to configure the application and database servers. A
+series of playbooks and a Vagrantfile can be found in `provision/ansible`. By
+running `vagrant up` in this directory, two bare Ubuntu 14.04 VM's will be spun
+up ready to be worked on. Running `ansible-playbook deploy.yml` will configure
+our application and database servers. The Vagrantfile will scrape your SSH key
+from `~/.ssh/id_rsa.pub` and add it to the `authorized_keys` of each VM. Please
+note that since we are pulling application code from GitHub we don't have a
+chance to setup Imgur and OAuth keys and as such application will be limited as
+noted before.
+
 ### Docker
 
 A Docker Compose file is included that will spin up two linked containers, one
