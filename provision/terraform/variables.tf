@@ -1,8 +1,11 @@
+# Variables no longer used but left for reference
+/*
 variable "access_key" {}
 variable "secret_key" {}
 variable "region" {
   default = "us-west-2"
 }
+*/
 
 variable "amis" {
   type = "map"
