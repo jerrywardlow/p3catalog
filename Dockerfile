@@ -4,7 +4,8 @@ FROM alpine:latest
 RUN apk update \
         && apk add python \
                    py-pip \
-                   py-psycopg2
+                   py-psycopg2 \
+                   postgresql-client
 
 # Copy all project files to container
 COPY app/ /itemcatalog
