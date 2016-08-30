@@ -9,6 +9,9 @@ RUN apk update \
 # Copy all project files to container
 COPY app/ /itemcatalog
 
+# Copy idler.sh to container
+COPY provision/idler.sh /
+
 WORKDIR /itemcatalog
 
 # Install pip packages
