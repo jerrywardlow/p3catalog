@@ -5,3 +5,5 @@ app = Flask(__name__)
 
 # Flask-SQLAlchemy
 db = SQLAlchemy(app)
+
+import catalog.models
