@@ -10,7 +10,7 @@ class Category(db.Model):
     description = db.Column(db.String, nullable=False)
     photo = db.Column(db.String)
     created = db.Column(db.DateTime, default = datetime.now)
-    user_id = db.Column(db.Integer, ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship(User)
 
 class Item(db.Model):
