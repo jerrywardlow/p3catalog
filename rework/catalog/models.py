@@ -18,6 +18,18 @@ class Category(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship(User)
 
+    @property
+    def serialize(self):
+        '''Object data in easily serialized format for endpoints'''
+        return {
+            'name': self.name,
+            'description': self.description,
+            'id': self.id,
+            'photo': self.photo,
+            'user_id': self.user_id,
+            'created': self.created,
+        }
+
 class Item(db.Model):
     __tablename__ = 'items'
 
@@ -31,3 +43,16 @@ class Item(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship(User)
     category = db.relationship(Category)
+
+    @property
+    def serialize(self):
+        '''Object data in easily serialized format for endpoints'''
+        return {
+            'name': self.name,
+            'description': self.description,
+            'id': self.id,
+            'photo': self.photo,
+            'category_id': self.category_id,
+            'user_id': self.user_id,
+            'created': self.created,
+        }
