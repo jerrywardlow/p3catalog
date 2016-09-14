@@ -4,7 +4,7 @@ from catalog import app, db
 
 from .models import User, Category, Item
 
-CATEGORIES_QUERY = Category.query.order_by(asc(Category.name))
+CATEGORIES_QUERY = Category.query.order_by(Category.name.asc())
 
 @app.route('/')
 @app.route('/index')
