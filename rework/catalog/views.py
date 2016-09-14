@@ -11,16 +11,16 @@ CATEGORIES_QUERY = Category.query.order_by(asc(Category.name))
 def index():
     categories = CATEGORIES_QUERY
     items = Item.query.order_by(desc(Item.created)).limit(4).all()
-    pass
+    return "index"
 
 @app.route('/categories/')
 def categories():
     categories = CATEGORIES_QUERY
-    pass
+    return "categories"
 
 @app.route('/category/<int:category_id>/')
 def category(category_id):
     categories = CATEGORIES_QUERY
     category = Category.query.filter_by(id=category_id).first()
     items = Item.query.filter_by(category_id=category_id).all()
-    pass
+    return "category/" + category_id
