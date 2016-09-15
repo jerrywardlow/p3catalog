@@ -11,7 +11,7 @@ su postgres -c 'createdb itemcatalog'
 su postgres -c 'psql itemcatalog < /db/postgres.sample_catalog.sql'
 
 # Configure PostgreSQL to accept remote connections
-echo 'host all all 192.168.56.3/32 password' >> /etc/postgresql/$(ls /etc/postgresql)/main/pg_hba.conf
+echo 'host all all 192.168.56.0/24 password' >> /etc/postgresql/$(ls /etc/postgresql)/main/pg_hba.conf
 echo "listen_addresses='192.168.56.2'" >> /etc/postgresql/$(ls /etc/postgresql)/main/postgresql.conf
 
 # Restart the PostgreSQL service
