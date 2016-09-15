@@ -10,7 +10,7 @@ CATEGORIES_QUERY = Category.query.order_by(Category.name.asc())
 @app.route('/index')
 def index():
     categories = CATEGORIES_QUERY
-    items = Item.query.order_by(Item.created.desc).limit(4).all()
+    items = Item.query.order_by(Item.created.desc()).limit(4).all()
     return "index"
 
 @app.route('/categories/')
