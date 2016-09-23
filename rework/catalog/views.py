@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import redirect, render_template, request, url_for
 
 from catalog import app, db
 
@@ -25,3 +25,20 @@ def category(category_id):
     category = Category.query.filter_by(id=category_id).first()
     items = Item.query.filter_by(category_id=category_id).all()
     return "category/" + category_id
+
+@app.roue('/category/add/', methods=['GET', 'POST'])
+def category_add():
+    categories = CATEGORIES_QUERY
+    if request.method == 'POST':
+        category = Category(name='test name',
+                            description='test description',
+                            user_id = 1)
+        if request.files['image']:
+            category.photo = "***Placeholder for imgur_upload() output***"
+        db.session.add(category)
+        flash("New Category '%s' Successfully Added" % category.name)
+        db.session.commit()
+        return redirect(url_for('index'))
+    else:
+        return "category add"
+
