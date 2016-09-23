@@ -19,6 +19,7 @@ def categories():
     return "categories"
 
 @app.route('/category/<int:category_id>/')
+@app.route('/category/<int:category_id>/home')
 def category(category_id):
     categories = CATEGORIES_QUERY
     category = Category.query.filter_by(id=category_id).first()
