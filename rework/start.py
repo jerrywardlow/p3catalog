@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from catalog import app
 
 if __name__ == "__main__":
