@@ -26,7 +26,7 @@ def category(category_id):
     items = Item.query.filter_by(category_id=category_id).all()
     return "category/" + category_id
 
-@app.roue('/category/add/', methods=['GET', 'POST'])
+@app.route('/category/add/', methods=['GET', 'POST'])
 def category_add():
     categories = CATEGORIES_QUERY
     if request.method == 'POST':
