@@ -48,4 +48,9 @@ def items():
     items = Item.query.all()
     return "items"
 
-
+@app.route('/item/<int:item_id>/')
+@app.route('/item/<int:item_id>/home')
+def item(item_id):
+    categories = CATEGORIES_QUERY
+    item = Item.query.filter_by(id=item_id).first()
+    return "item/" + item_id
