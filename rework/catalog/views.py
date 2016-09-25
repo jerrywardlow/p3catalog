@@ -42,3 +42,10 @@ def category_add():
     else:
         return "category add"
 
+@app.route('/items/')
+def items():
+    categories = CATEGORIES_QUERY
+    items = Item.query.all()
+    return "items"
+
+
