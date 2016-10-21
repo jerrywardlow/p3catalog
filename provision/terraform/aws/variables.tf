@@ -12,3 +12,8 @@ variable "private_subnet_cidr" {
     description = "CIDR block for private subnet"
     default = "10.0.10.0/24"
 }
+
+variable "nat-ami" {
+    description = "Amazon Linux AMI VPC NAT x86_64 HVM GP2"
+    default = "ami-69ae8259"
+}
