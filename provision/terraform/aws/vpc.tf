@@ -1,5 +1,5 @@
 provider "aws" {
-    region = "${var.region}"    
+    region = "${var.region}"
 }
 
 resource "aws_vpc" "default" {
@@ -8,4 +8,9 @@ resource "aws_vpc" "default" {
     tags {
         Name = "item-catalog"
     }
+}
+
+# Internet gateway
+resource "aws_internet_gateway" "default" {
+    vpc_id = "${aws_vpc.default.id}"
 }
