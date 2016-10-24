@@ -24,4 +24,15 @@ resource "aws_security_group" "nat" {
         protocol = "tcp"
         cidr_blocks = ["${var.private_subnet_cidr}"]
     }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    
+    tags {
+        name = "catalog-nat"
+    }
 }
