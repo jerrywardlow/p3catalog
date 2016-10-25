@@ -17,3 +17,8 @@ variable "nat-ami" {
     description = "Amazon Linux AMI VPC NAT x86_64 HVM GP2"
     default = "ami-69ae8259"
 }
+
+variable "ubuntu-ami" {
+    description = "Current Ubuntu 14.04 AMI"
+    default = "ami-d732f0b7"
+}
