@@ -1,11 +1,12 @@
-# Webserver Instance
-resrouce "aws_instance" "web" {
+# Web server Instance
+resource "aws_instance" "web" {
     ami = "${var.ubuntu-ami}"
     instance_type = "t2.micro"
     subnet_id = "${aws_subnet.public.id}"
-    vpc_security_group_ids = ["pass"]
+    vpc_security_group_ids = ["aws_security_group.web.id"]
     key_name = "${aws_key_pair.catalog.key_name}"
-    tags = {
+
+    tags {
         name = "catalog-web"
     }
 }
