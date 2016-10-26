@@ -11,7 +11,8 @@ resource "aws_instance" "nat" {
     vpc_security_group_ids = ["${aws_security_group.nat.id}"]
     source_dest_check = false
     key_name = "${aws_key_pair.catalog.key_name}"
-    tags = {
+
+    tags {
         name = "catalog-nat"
     }
 }
