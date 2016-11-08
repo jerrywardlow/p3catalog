@@ -2,7 +2,7 @@
     "variables": {
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-        "digitalocean_access_token": "{{env `DIGITALOCEAN_ACCESS_TOKEN`}}"
+        "digitalocean_token": "{{env `DIGITALOCEAN_TOKEN`}}"
     },
     "builders": [{
         "name": "aws",
@@ -18,7 +18,7 @@
     {
         "name": "do",
         "type": "digitalocean",
-        "api_token": "{{user `digitalocean_access_token`}}",
+        "api_token": "{{user `digitalocean_token`}}",
         "image": "ubuntu-14-04-x64",
         "region": "sfo2",
         "size": "512mb",
