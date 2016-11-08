@@ -11,4 +11,6 @@ Uses standard AWS CLI environment variables
 
 ### DigitalOcean
 
+Uses DigitalOcean recommended environment variable
 
+* DIGITALOCEAN_TOKEN
