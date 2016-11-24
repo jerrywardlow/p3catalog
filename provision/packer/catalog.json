@@ -35,14 +35,10 @@
         "preemptible": true,
         "machine_type": "n1-standard-1"
     }],
-    "provisioners": [{
-        "type": "shell",
-        "inline": [ "sleep 30" ]
-    },
+    "provisioners": [
     {
         "type": "shell",
-        "scripts": [
-            "scripts/catalog.sh"
-        ]
+        "scripts": ["scripts/catalog.sh"],
+        "pause_before": "10s"
     }]
 }
