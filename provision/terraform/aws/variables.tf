@@ -31,3 +31,12 @@ data "aws_ami" "app" {
     }
     owners = ["099720109477"]
 }
+
+data "aws_ami" "nat" {
+    most_recent = true
+    filter {
+        name = "name"
+        values = ["amzn-ami-vpc-nat-hvm*"]
+    }
+    owners = ["amazon"]
+}
