@@ -22,3 +22,12 @@ variable "ubuntu-ami" {
     description = "Current Ubuntu 14.04 AMI"
     default = "ami-d732f0b7"
 }
+
+data "aws_ami" "app" {
+    most_recent = true
+    filter {
+        name = "name"
+        values = ["*hvm-ssd/ubuntu-xenial-16.04-amd64-server*"]
+    }
+    owners = ["099720109477"]
+}
