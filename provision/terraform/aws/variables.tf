@@ -13,7 +13,7 @@ variable "private_subnet_cidr" {
     default = "10.0.10.0/24"
 }
 
-data "aws_ami" "app" {
+data "aws_ami" "ubuntu" {
     most_recent = true
     filter {
         name = "name"
