@@ -1,11 +1,10 @@
 FROM alpine:latest
 
 # Install basic packages needed for the Flask web app
-RUN apk update \
-        && apk add python \
-                   py-pip \
-                   py-psycopg2 \
-                   postgresql-client
+RUN apk update && apk add python \
+                          py-pip \
+                          py-psycopg2 \
+                          postgresql-client
 
 # Copy all project files to container
 COPY app/ /itemcatalog
