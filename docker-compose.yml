@@ -5,7 +5,7 @@ services:
         build: .
         image: item-catalog
         ports:
-            - '5000:5000'
+            - "5000:5000"
         environment:
             PGPASSWORD: pgpassword
         depends_on:
@@ -15,7 +15,7 @@ services:
     postgres:
         image: postgres
         ports:
-            - '5432:5432'
+            - "5432:5432"
         volumes:
             - ./db/postgres.sample_catalog.sql:/docker-entrypoint-initdb.d/itemcatalog.sql
         environment:
